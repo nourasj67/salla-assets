@@ -111,7 +111,7 @@
 
                                     <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">معتمد من هيئة الزكاة والضريبة والجمارك</li>
 
-                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">معتمد من هيئة الزكاة والضريبة والجمارك</li>
+                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">السعر 660 ريال فقط سنويًا</li>
 
                                 </ul>
                             </div>
