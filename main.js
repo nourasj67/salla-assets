@@ -81,7 +81,7 @@
                         <!-- Basic Plan (Right Side) -->
                         <div class="pricing-card basic-plan" style="background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.12); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; height: 100%;">
                             <div class="card-header" style="background: linear-gradient(135deg, #145a86 0%, #1e7ba6 100%); padding: 30px 25px; text-align: center; color: white;">
-                                <h3 style="font-size: 1.4rem; margin: 0; font-weight: 700; line-height: 1.4;">المؤتمن لايت - النسخة الاساسية</h3>
+                                <h3 style="font-size: 1.4rem; margin: 0; font-weight: 700; line-height: 1.4;">المؤتمن لايت - النسخة الأساسية</h3>
                                 <p style="font-size: 0.95rem; margin: 5px 0 0 0; opacity: 0.95; font-weight: 500;">AL MO'TAMAN LITE - BASIC</p>
                             </div>
                             
@@ -91,13 +91,13 @@
                                     
                                     <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">يدعم واجهات اللمس</li>
                                     
-                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">تخصيص صور للاصناف</li>
+                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">تخصيص صور للأصناف</li>
                                     
-                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">تقارير متنوعة و مفصلة : ( حسب الفواتير<br/>حسب الاصناف   حسب طرق الدفع )</li>
+                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">تقارير متنوعة و مفصلة : ( حسب الفواتير<br/>حسب الأصناف   حسب طرق الدفع )</li>
                                     
-                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">مراقبة كميات الاصناف</li>
+                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">مراقبة كميات الأصناف</li>
                                     
-                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">عدد الاصناف : 100 صنف ( مع إمكانية طلب<br/>زيادة عدد الاصناف )</li>
+                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">عدد الأصناف : 100 صنف ( مع إمكانية طلب<br/>زيادة عدد الأصناف )</li>
                                     
                                     <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">عدد المستخدمين : 2 ( مع إمكانية طلب<br/>زيادة عدد المستخدمين )</li>
                                     
@@ -105,9 +105,13 @@
                                     
                                     <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">التحكم بصلاحيات المستخدمين</li>
                                     
-                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">متوافقة مع معايير الفوترة الالكترونية<br/>المرحلة الاولى</li>
+                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">متوافقة مع معايير الفوترة الإلكترونية<br/>المرحلة الأولى</li>
                                     
                                     <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">يدعم الفواتير الضريبية المبسطة B2C</li>
+
+                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">معتمد من هيئة الزكاة والضريبة والجمارك</li>
+
+                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">السعر 660 ريال فقط سنويًا</li>
                                 </ul>
                             </div>
                             
@@ -133,11 +137,15 @@
                                 </div>
                                 
                                 <ul style="list-style: none; padding: 0; margin: 0;">
-                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">عدد الاصناف : 500 صنف ( مع إمكانية طلب<br/>زيادة عدد الاصناف )</li>
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">عدد الأصناف : 500 صنف ( مع إمكانية طلب<br/>زيادة عدد الأصناف )</li>
                                     
                                     <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">عدد المستخدمين : 3 ( مع إمكانية طلب<br/>زيادة عدد المستخدمين )</li>
                                     
-                                    <li class="feature-item highlighted" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">متوافق مع معايير الفوترة الالكترونية<br/>المرحلة الاولى و الثانية</li>
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">متوافق مع معايير الفوترة الإلكترونية<br/>المرحلة الأولى و الثانية</li>
+                                    
+                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">السعر 1000 ريال فقط سنويًا</li>
+
+                                    
                                 </ul>
                             </div>
                             
