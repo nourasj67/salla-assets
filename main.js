@@ -107,11 +107,12 @@
                                     
                                     <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 70px; display: flex; align-items: center; justify-content: center;">متوافقة مع معايير الفوترة الإلكترونية<br/>المرحلة الأولى</li>
                                     
-                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">يدعم الفواتير الضريبية المبسطة B2C</li>
+                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">يدعم الفواتير الضريبية المبسطة B2C</li>
+
+                                    <li class="feature-item" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">معتمد من هيئة الزكاة والضريبة والجمارك</li>
 
                                     <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">معتمد من هيئة الزكاة والضريبة والجمارك</li>
 
-                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">السعر 660 ريال فقط سنويًا</li>
                                 </ul>
                             </div>
                             
@@ -133,7 +134,7 @@
                             
                             <div class="card-body" style="padding: 35px 25px; flex: 1; display: flex; flex-direction: column;">
                                 <div class="all-features-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 18px 20px; border-radius: 12px; margin-bottom: 25px; text-align: center; border: 2px solid #5dade2; min-height: 50px; display: flex; align-items: center; justify-content: center;">
-                                    <p style="margin: 0; color: #145a86; font-size: 1.1rem; font-weight: 700; line-height: 1.4;">جميع ميزات النسخة الاساسية</p>
+                                    <p style="margin: 0; color: #145a86; font-size: 1.1rem; font-weight: 700; line-height: 1.4;">جميع ميزات النسخة الأساسية</p>
                                 </div>
                                 
                                 <ul style="list-style: none; padding: 0; margin: 0;">
@@ -141,9 +142,10 @@
                                     
                                     <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">عدد المستخدمين : 3 ( مع إمكانية طلب<br/>زيادة عدد المستخدمين )</li>
                                     
-                                    <li class="feature-item highlighted" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">متوافق مع معايير الفوترة الإلكترونية<br/>المرحلة الأولى و الثانية</li>
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">متوافق مع معايير الفوترة الإلكترونية<br/>المرحلة الأولى و الثانية</li>
+
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #e3f2fd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">السعر 1000 ريال فقط سنويًا</li>
                                     
-                                    <li class="feature-item" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; min-height: 50px; display: flex; align-items: center; justify-content: center;">السعر 1000 ريال فقط سنويًا</li>
 
                                     
                                 </ul>
