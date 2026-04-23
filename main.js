@@ -158,56 +158,73 @@
                             </div>
                         </div>
 
-                        <!-- === تعديل: نسخة احترافية محسّنة بنفس تنسيق القياسية === -->
+                        <!-- === النسخة الاحترافية (مطابقة للقياسية) === -->
                         <div class="pricing-card pro-plan" style="background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.18); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 3px solid #f39c12; display: flex; flex-direction: column; position: relative; height: 100%;">
                         
-                            <!-- شارة متحركة مثل الأكثر طلباً -->
+                            <!-- شارة الأقوى -->
                             <div class="popular-badge" style="position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 10px rgba(243,156,18,0.3); z-index: 10;">
                                 الأقوى 🔥
                             </div>
                         
+                            <!-- الهيدر -->
                             <div class="card-header" style="background: linear-gradient(135deg, #d68910 0%, #f1c40f 100%); padding: 55px 25px 30px 25px; text-align: center; color: white;">
-                                <h3 style="font-size: 1.4rem; margin: 0; font-weight: 700;">المؤتمن لايت - النسخة الاحترافية</h3>
-                                <p style="font-size: 0.95rem; margin: 5px 0 0; opacity: 0.95;">AL MO'TAMAN LITE - PRO</p>
+                                <h3 style="font-size: 1.4rem; margin: 0; font-weight: 700; line-height: 1.4;">المؤتمن لايت - النسخة الاحترافية</h3>
+                                <p style="font-size: 0.95rem; margin: 5px 0 0 0; opacity: 0.95; font-weight: 500;">AL MO'TAMAN LITE - PRO</p>
                             </div>
                         
-                            <div class="card-body" style="padding: 35px 25px; flex:1; display:flex; flex-direction:column;">
+                            <!-- المحتوى -->
+                            <div class="card-body" style="padding: 35px 25px; flex: 1; display: flex; flex-direction: column;">
                         
-                                <!-- نفس صندوق "جميع الميزات" -->
+                                <!-- نفس صندوق القياسية -->
                                 <div class="all-features-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); padding: 18px 20px; border-radius: 12px; margin-bottom: 25px; text-align: center; border: 2px solid #f39c12; min-height: 50px; display: flex; align-items: center; justify-content: center;">
-                                    <p style="margin: 0; color: #b9770e; font-size: 1.1rem; font-weight: 700;">
+                                    <p style="margin: 0; color: #b9770e; font-size: 1.1rem; font-weight: 700; line-height: 1.4;">
                                         جميع ميزات النسخة الأساسية والقياسية
                                     </p>
                                 </div>
                         
+                                <!-- القائمة -->
                                 <ul style="list-style: none; padding: 0; margin: 0;">
                         
-                                    <li class="feature-item highlighted">دعم كامل للفاتورة الإلكترونية (المرحلة الأولى والثانية)</li>
-                        
-                                    <li class="feature-item highlighted">عدد المستخدمين : 5</li>
-                        
-                                    <li class="feature-item highlighted">عدد الأصناف : 1000</li>
-                        
-                                    <li class="feature-item highlighted" style="min-height:70px;">شاشة العميل الرقمية مع عرض صور دعائية مخصصة</li>
-                        
-                                    <li class="feature-item highlighted" style="min-height:70px;">تقارير إحصائية وتحليلية ومخططات بيانية (يومي - شهري - سنوي)</li>
-                        
-                                    <li class="feature-item highlighted">تحليل أعلى الأصناف والمجموعات مبيعًا</li>
-                        
-                                    <li class="feature-item highlighted">تحليل المبيعات والمرتجعات</li>
-                        
-                                    <li class="feature-item highlighted" style="min-height:70px;">
-                                        تحليل ذروة المبيعات<br/>
-                                        (ساعة - يوم - شهر - سنة)
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        دعم كامل للفاتورة الإلكترونية<br/>المرحلة الأولى و الثانية
                                     </li>
                         
-                                    <li class="feature-item highlighted" style="font-weight: bold;">
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        عدد المستخدمين : 5 ( مع إمكانية طلب<br/>زيادة عدد المستخدمين )
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        عدد الأصناف : 1000 صنف ( مع إمكانية طلب<br/>زيادة عدد الأصناف )
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        شاشة العميل الرقمية مع عرض الفاتورة<br/>وشرائح دعائية مخصصة
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        تقارير إحصائية وتحليلية ومخططات بيانية<br/>(يومي - أسبوعي - شهري - سنوي)
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        تحليل أعلى الأصناف والمجموعات مبيعًا
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        مقارنة المبيعات مع المرتجعات
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; border-bottom: 1px solid #e8e8e8; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center;">
+                                        تحليل ذروة المبيعات (ساعة - يوم - شهر - سنة)
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="padding: 14px 12px; color: #2c3e50; font-size: 1rem; text-align: center; line-height: 1.5; background: linear-gradient(90deg, transparent 0%, #fff3cd 100%); min-height: 70px; display: flex; align-items: center; justify-content: center; font-weight: bold;">
                                         السعر 1200 ريال فقط سنويًا
                                     </li>
                         
                                 </ul>
                             </div>
                         
+                            <!-- الفوتر -->
                             <div class="card-footer" style="background: linear-gradient(135deg, #f39c12 0%, #f7dc6f 100%); padding: 30px 25px; text-align: center; margin-top: auto;">
                                 <button class="pricing-btn pro-btn" style="width: 85%; padding: 16px 30px; background: white; color: #d68910; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer;">
                                     اشترك الآن
@@ -215,7 +232,7 @@
                             </div>
                         
                         </div>
-                        <!-- === نهاية التعديل === -->
+                        <!-- === نهاية النسخة الاحترافية === -->
                         
                     </div>
                 </div>
