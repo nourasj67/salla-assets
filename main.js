@@ -76,7 +76,7 @@
             <section class="pricing-plans-section" style="padding: 80px 20px; background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);">
                 <div class="container" style="max-width: 1200px; margin: 0 auto;">
                     
-                    <div class="pricing-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 950px; margin: 0 auto;">
+                    <div class="pricing-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 950px; margin: 0 auto;">
                         
                         <!-- Basic Plan (Right Side) -->
                         <div class="pricing-card basic-plan" style="background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.12); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; height: 100%;">
@@ -125,7 +125,7 @@
                         
                         <!-- Standard Plan (Left Side) -->
                         <div class="pricing-card standard-plan" style="background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.18); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 3px solid #5dade2; display: flex; flex-direction: column; position: relative; height: 100%;">
-                            <div class="popular-badge" style="position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 10px rgba(255,107,107,0.3); z-index: 10;">الأكثر طلباً ⭐</div>
+                            <div class="popular-badge" style="position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 10px rgba(255,107,107,0.3); z-index: 10;">الأكثر طلبًا ⭐</div>
                             
                             <div class="card-header" style="background: linear-gradient(135deg, #145a86 0%, #1e7ba6 100%); padding: 55px 25px 30px 25px; text-align: center; color: white;">
                                 <h3 style="font-size: 1.4rem; margin: 0; font-weight: 700; line-height: 1.4;">المؤتمن لايت - النسخة القياسية</h3>
@@ -157,6 +157,49 @@
                                 </button>
                             </div>
                         </div>
+
+                        <!-- === تعديل: إضافة النسخة الاحترافية === -->
+                        <div class="pricing-card pro-plan" style="background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.18); transition: all 0.4s; border: 3px solid #f39c12; display: flex; flex-direction: column; position: relative; height: 100%;">
+                        
+                            <div style="position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.85rem; font-weight: 700;">
+                                الأقوى 🔥
+                            </div>
+                        
+                            <div class="card-header" style="background: linear-gradient(135deg, #d68910 0%, #f1c40f 100%); padding: 55px 25px 30px 25px; text-align: center; color: white;">
+                                <h3 style="font-size: 1.4rem; margin: 0; font-weight: 700;">المؤتمن لايت - النسخة الاحترافية</h3>
+                                <p style="margin: 5px 0 0;">AL MO'TAMAN LITE - PRO</p>
+                            </div>
+                        
+                            <div class="card-body" style="padding: 35px 25px;">
+                                
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-weight: bold;">
+                                    جميع ميزات النسخة الأساسية والقياسية
+                                </div>
+                        
+                                <ul style="list-style: none; padding: 0; margin: 0; text-align: center;">
+                                    <li>دعم كامل للفاتورة الإلكترونية (المرحلة الأولى والثانية)</li>
+                                    <li>عدد المستخدمين : 5</li>
+                                    <li>عدد الأصناف : 1000</li>
+                                    <li>شاشة العميل الرقمية مع عرض صور دعائية</li>
+                                    <li>تقارير إحصائية وتحليلية ومخططات بيانية</li>
+                                    <li>تحليل أعلى الأصناف والمجموعات مبيعًا</li>
+                                    <li>تحليل المبيعات والمرتجعات</li>
+                                    <li>تحليل ذروة المبيعات (ساعة / يوم / شهر / سنة)</li>
+                        
+                                    <li style="font-weight: bold; margin-top: 10px;">
+                                        السعر 1200 ريال فقط سنويًا
+                                    </li>
+                                </ul>
+                            </div>
+                        
+                            <div class="card-footer" style="background: linear-gradient(135deg, #f39c12 0%, #f7dc6f 100%); padding: 30px; text-align: center; margin-top: auto;">
+                                <button class="pricing-btn pro-btn" style="width: 85%; padding: 16px; background: white; color: #d68910; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer;">
+                                    اشترك الآن
+                                </button>
+                            </div>
+                        
+                        </div>
+                        <!-- === نهاية الإضافة === -->
                         
                     </div>
                 </div>
@@ -298,14 +341,17 @@
         targetSection.insertAdjacentHTML('afterend', pricingHTML);
         
         // Add click event listeners to buttons
-        const basicUrl = 'https://shop.barmajah.net/ar/%D8%A7%D9%84%D9%85%D8%A4%D8%AA%D9%85%D9%86-%D9%84%D8%A7%D9%8A%D8%AA-%D8%A7%D9%84%D9%86%D8%B3%D8%AE%D8%A9-%D8%A7%D9%84%D8%A7%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9/p1388465160';
+        const basicUrl = 'https://shop.barmajah.net/ar/almotaman-light-basic/p1388465160';
         const standardUrl = 'https://shop.barmajah.net/ar/almotaman-light-standard/p1348856160';
+        const proUrl = 'https://shop.barmajah.net/ar/almotaman-light-pro/p1252727701'; // تعديل
 
         const pricingButtons = document.querySelectorAll('.pricing-btn');
         pricingButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                const url = this.classList.contains('featured') ? standardUrl : basicUrl;
+                let url = basicUrl;
+                if (this.classList.contains('featured')) url = standardUrl;
+                if (this.classList.contains('pro-btn')) url = proUrl; // تعديل  
                 window.location.href = url;
             });
         });
