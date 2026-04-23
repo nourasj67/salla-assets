@@ -299,7 +299,7 @@
         
         // Add click event listeners to buttons
         const basicUrl = 'https://shop.barmajah.net/ar/%D8%A7%D9%84%D9%85%D8%A4%D8%AA%D9%85%D9%86-%D9%84%D8%A7%D9%8A%D8%AA-%D8%A7%D9%84%D9%86%D8%B3%D8%AE%D8%A9-%D8%A7%D9%84%D8%A7%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9/p1388465160';
-        const standardUrl = 'https://shop.barmajah.net/ar/%D8%A7%D9%84%D9%85%D8%A4%D8%AA%D9%85%D9%86-%D9%84%D8%A7%D9%8A%D8%AA-%D8%A7%D9%84%D9%86%D8%B3%D8%AE%D8%A9-%D8%A7%D9%84%D9%82%D9%8A%D8%A7%D8%B3%D9%8A%D8%A9/p595979992';
+        const standardUrl = 'https://shop.barmajah.net/ar/almotaman-light-standard/p1348856160';
 
         const pricingButtons = document.querySelectorAll('.pricing-btn');
         pricingButtons.forEach(button => {
