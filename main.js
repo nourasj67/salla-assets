@@ -158,48 +158,64 @@
                             </div>
                         </div>
 
-                        <!-- === تعديل: إضافة النسخة الاحترافية === -->
-                        <div class="pricing-card pro-plan" style="background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.18); transition: all 0.4s; border: 3px solid #f39c12; display: flex; flex-direction: column; position: relative; height: 100%;">
+                        <!-- === تعديل: نسخة احترافية محسّنة بنفس تنسيق القياسية === -->
+                        <div class="pricing-card pro-plan" style="background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.18); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 3px solid #f39c12; display: flex; flex-direction: column; position: relative; height: 100%;">
                         
-                            <div style="position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.85rem; font-weight: 700;">
+                            <!-- شارة متحركة مثل الأكثر طلباً -->
+                            <div class="popular-badge" style="position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 10px rgba(243,156,18,0.3); z-index: 10;">
                                 الأقوى 🔥
                             </div>
                         
                             <div class="card-header" style="background: linear-gradient(135deg, #d68910 0%, #f1c40f 100%); padding: 55px 25px 30px 25px; text-align: center; color: white;">
                                 <h3 style="font-size: 1.4rem; margin: 0; font-weight: 700;">المؤتمن لايت - النسخة الاحترافية</h3>
-                                <p style="margin: 5px 0 0;">AL MO'TAMAN LITE - PRO</p>
+                                <p style="font-size: 0.95rem; margin: 5px 0 0; opacity: 0.95;">AL MO'TAMAN LITE - PRO</p>
                             </div>
                         
-                            <div class="card-body" style="padding: 35px 25px;">
-                                
-                                <div style="background: #fff3cd; padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-weight: bold;">
-                                    جميع ميزات النسخة الأساسية والقياسية
+                            <div class="card-body" style="padding: 35px 25px; flex:1; display:flex; flex-direction:column;">
+                        
+                                <!-- نفس صندوق "جميع الميزات" -->
+                                <div class="all-features-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); padding: 18px 20px; border-radius: 12px; margin-bottom: 25px; text-align: center; border: 2px solid #f39c12; min-height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <p style="margin: 0; color: #b9770e; font-size: 1.1rem; font-weight: 700;">
+                                        جميع ميزات النسخة الأساسية والقياسية
+                                    </p>
                                 </div>
                         
-                                <ul style="list-style: none; padding: 0; margin: 0; text-align: center;">
-                                    <li>دعم كامل للفاتورة الإلكترونية (المرحلة الأولى والثانية)</li>
-                                    <li>عدد المستخدمين : 5</li>
-                                    <li>عدد الأصناف : 1000</li>
-                                    <li>شاشة العميل الرقمية مع عرض صور دعائية</li>
-                                    <li>تقارير إحصائية وتحليلية ومخططات بيانية</li>
-                                    <li>تحليل أعلى الأصناف والمجموعات مبيعًا</li>
-                                    <li>تحليل المبيعات والمرتجعات</li>
-                                    <li>تحليل ذروة المبيعات (ساعة / يوم / شهر / سنة)</li>
+                                <ul style="list-style: none; padding: 0; margin: 0;">
                         
-                                    <li style="font-weight: bold; margin-top: 10px;">
+                                    <li class="feature-item highlighted">دعم كامل للفاتورة الإلكترونية (المرحلة الأولى والثانية)</li>
+                        
+                                    <li class="feature-item highlighted">عدد المستخدمين : 5</li>
+                        
+                                    <li class="feature-item highlighted">عدد الأصناف : 1000</li>
+                        
+                                    <li class="feature-item highlighted" style="min-height:70px;">شاشة العميل الرقمية مع عرض صور دعائية مخصصة</li>
+                        
+                                    <li class="feature-item highlighted" style="min-height:70px;">تقارير إحصائية وتحليلية ومخططات بيانية (يومي - شهري - سنوي)</li>
+                        
+                                    <li class="feature-item highlighted">تحليل أعلى الأصناف والمجموعات مبيعًا</li>
+                        
+                                    <li class="feature-item highlighted">تحليل المبيعات والمرتجعات</li>
+                        
+                                    <li class="feature-item highlighted" style="min-height:70px;">
+                                        تحليل ذروة المبيعات<br/>
+                                        (ساعة - يوم - شهر - سنة)
+                                    </li>
+                        
+                                    <li class="feature-item highlighted" style="font-weight: bold;">
                                         السعر 1200 ريال فقط سنويًا
                                     </li>
+                        
                                 </ul>
                             </div>
                         
-                            <div class="card-footer" style="background: linear-gradient(135deg, #f39c12 0%, #f7dc6f 100%); padding: 30px; text-align: center; margin-top: auto;">
-                                <button class="pricing-btn pro-btn" style="width: 85%; padding: 16px; background: white; color: #d68910; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer;">
+                            <div class="card-footer" style="background: linear-gradient(135deg, #f39c12 0%, #f7dc6f 100%); padding: 30px 25px; text-align: center; margin-top: auto;">
+                                <button class="pricing-btn pro-btn" style="width: 85%; padding: 16px 30px; background: white; color: #d68910; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer;">
                                     اشترك الآن
                                 </button>
                             </div>
                         
                         </div>
-                        <!-- === نهاية الإضافة === -->
+                        <!-- === نهاية التعديل === -->
                         
                     </div>
                 </div>
