@@ -109,7 +109,7 @@
         topItems:       isArabic ? 'تحليل أعلى الأصناف والمجموعات مبيعًا'                                           : 'Top-selling items & categories analysis',
         salesVsReturns: isArabic ? 'مقارنة المبيعات مع المرتجعات'                                                   : 'Sales vs. returns comparison',
         peakSales:      isArabic ? 'تحليل ذروة المبيعات (ساعة - يوم - شهر - سنة)'                                  : 'Peak sales analysis (hour - day - month - year)',
-        price1200:      isArabic ? 'السعر 1200 ريال فقط سنويًا'                                                      : 'Price: 1200 SAR / year only',
+        price1200:      isArabic ? 'السعر 1300 ريال فقط سنويًا'                                                      : 'Price: 1300 SAR / year only',
     };
     // ───────────────────────────────────────────────────────────────
  
