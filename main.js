@@ -457,30 +457,35 @@
     }
 })();
  
-// Add icons to Customer Service menu links
+// Add icons to Customer Service menu links (Multi-language Support)
 (function() {
     'use strict';
  
     const icons = {
         'واتساب': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;flex-shrink:0;" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`,
+        'WhatsApp': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-right:6px;flex-shrink:0;" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`,
+        
         'هاتف': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;flex-shrink:0;" fill="#1e7ba6"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>`,
+        'Phone': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-right:6px;flex-shrink:0;" fill="#1e7ba6"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>`,
+        
         'تلقرام': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;flex-shrink:0;" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>`,
-        'إيميل': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;flex-shrink:0;" fill="#e74c3c"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`
+        'Telegram': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-right:6px;flex-shrink:0;" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>`,
+        
+        'إيميل': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;flex-shrink:0;" fill="#e74c3c"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
+        'Email': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-right:6px;flex-shrink:0;" fill="#e74c3c"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`
     };
  
-    // ─── تعديل: تحديث الرقم الجديد هنا فقط ───────────────────────
     const NEW_PHONE = '966543423630';
-    // ──────────────────────────────────────────────────────────────
  
     const menuItemIds = {
         '2063698619': 'واتساب',
-        '1237953022': 'هاتف',   // الـ ID القديم — مُبقى للتوافق
+        '1237953022': 'هاتف',
         '570846204':  'تلقرام',
         '650889349':  'إيميل'
     };
  
     const CONTACT_MENU_IDS = {
-        phone: '1237953022',    // الـ ID القديم — الكود يبحث أيضاً بالـ aria-label كبديل
+        phone: '1237953022',
         email: '650889349'
     };
  
@@ -494,9 +499,10 @@
         phone: 'tel:+' + NEW_PHONE
     };
  
+    // قائمة المسميات للتحقق منها عند الضغط باللغتين
     const CONTACT_LABELS = {
-        email: 'إيميل',
-        phone: 'هاتف'
+        email: ['إيميل', 'Email', 'email'],
+        phone: ['هاتف', 'Phone', 'phone', 'Call Us']
     };
  
     function normalizeEmailHref(rawValue) {
@@ -516,7 +522,6 @@
     }
  
     function forceContactLinks() {
-        // بالـ ID المعروف
         const phoneItemById = document.getElementById(CONTACT_MENU_IDS.phone);
         if (phoneItemById) {
             const phoneLink = phoneItemById.querySelector('a');
@@ -535,18 +540,15 @@
             }
         }
  
-        // بالـ aria-label — يعمل حتى لو تغيّر الـ ID بعد إعادة إضافة العنصر في سلة
-        document.querySelectorAll('a[aria-label="' + CONTACT_LABELS.phone + '"]').forEach(function(link) {
-            link.setAttribute('href', CONTACT_HREFS.phone);
-            link.setAttribute('target', '_self');
+        // دعم اللغتين في الـ aria-label
+        [...CONTACT_LABELS.phone, ...CONTACT_LABELS.email].forEach(label => {
+            document.querySelectorAll('a[aria-label="' + label + '"]').forEach(function(link) {
+                const targetHref = CONTACT_LABELS.phone.includes(label) ? CONTACT_HREFS.phone : CONTACT_HREFS.email;
+                link.setAttribute('href', targetHref);
+                link.setAttribute('target', '_self');
+            });
         });
  
-        document.querySelectorAll('a[aria-label="' + CONTACT_LABELS.email + '"]').forEach(function(link) {
-            link.setAttribute('href', CONTACT_HREFS.email);
-            link.setAttribute('target', '_self');
-        });
- 
-        // بحث إضافي: أي رابط tel: يحتوي على الرقم القديم → استبدله بالجديد
         document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
             const href = link.getAttribute('href') || '';
             if (href.includes('567078988')) {
@@ -563,49 +565,17 @@
             if (!clickedLink) return;
  
             const clickedLabel = (clickedLink.getAttribute('aria-label') || '').trim();
-            if (clickedLabel === CONTACT_LABELS.email) {
+            
+            if (CONTACT_LABELS.email.includes(clickedLabel)) {
                 clickedLink.setAttribute('href', CONTACT_HREFS.email);
                 clickedLink.setAttribute('target', '_self');
                 return;
             }
  
-            if (clickedLabel === CONTACT_LABELS.phone) {
+            if (CONTACT_LABELS.phone.includes(clickedLabel)) {
                 clickedLink.setAttribute('href', CONTACT_HREFS.phone);
                 clickedLink.setAttribute('target', '_self');
                 return;
-            }
- 
-            const emailItem = document.getElementById(CONTACT_MENU_IDS.email);
-            if (emailItem && emailItem.contains(clickedLink)) {
-                const emailHref = CONTACT_HREFS.email || normalizeEmailHref(clickedLink.getAttribute('href'));
-                if (!emailHref) return;
-                clickedLink.setAttribute('href', emailHref);
-                clickedLink.setAttribute('target', '_self');
-                return;
-            }
- 
-            const phoneItem = document.getElementById(CONTACT_MENU_IDS.phone);
-            if (phoneItem && phoneItem.contains(clickedLink)) {
-                const phoneHref = CONTACT_HREFS.phone || normalizeTelHref(clickedLink.getAttribute('href'));
-                if (!phoneHref) return;
-                clickedLink.setAttribute('href', phoneHref);
-                clickedLink.setAttribute('target', '_self');
-            }
-        }, true);
- 
-        document.body.addEventListener('pointerdown', function(e) {
-            const clickedLink = e.target.closest('a');
-            if (!clickedLink) return;
- 
-            const clickedLabel = (clickedLink.getAttribute('aria-label') || '').trim();
-            if (clickedLabel === CONTACT_LABELS.email) {
-                clickedLink.setAttribute('href', CONTACT_HREFS.email);
-                clickedLink.setAttribute('target', '_self');
-            }
- 
-            if (clickedLabel === CONTACT_LABELS.phone) {
-                clickedLink.setAttribute('href', CONTACT_HREFS.phone);
-                clickedLink.setAttribute('target', '_self');
             }
         }, true);
  
@@ -613,49 +583,23 @@
     }
  
     function injectMenuIcons() {
-        // المنهج 1: البحث بالـ aria-label على أي [data-menu-item]
-        document.querySelectorAll('[data-menu-item] a[aria-label]').forEach(function(link) {
-            const label = link.getAttribute('aria-label');
-            if (!icons[label]) return;
-            const span = link.querySelector('span');
-            if (!span || link.querySelector('.menu-icon-injected')) return;
-            const iconEl = document.createElement('span');
-            iconEl.className = 'menu-icon-injected';
-            iconEl.innerHTML = icons[label];
-            iconEl.style.cssText = 'display:inline-flex;align-items:center;';
-            span.style.cssText = 'display:inline-flex;align-items:center;gap:6px;';
-            span.insertBefore(iconEl, span.firstChild);
-        });
- 
-        // المنهج 2: بحث أوسع — أي <a> يحمل aria-label من قائمة الأيقونات
-        // (يعمل حتى بدون data-menu-item، ويغطي حالة تغيّر الـ ID)
+        // البحث في جميع الروابط التي تحمل aria-label موجود في قائمة الأيقونات لدينا
         document.querySelectorAll('a[aria-label]').forEach(function(link) {
             const label = link.getAttribute('aria-label');
             if (!icons[label]) return;
             if (link.querySelector('.menu-icon-injected')) return;
+            
             const span = link.querySelector('span');
             if (!span) return;
+            
             const iconEl = document.createElement('span');
             iconEl.className = 'menu-icon-injected';
             iconEl.innerHTML = icons[label];
             iconEl.style.cssText = 'display:inline-flex;align-items:center;';
+            
             span.style.cssText = 'display:inline-flex;align-items:center;gap:6px;';
-            span.insertBefore(iconEl, span.firstChild);
-        });
- 
-        // المنهج 3: بالـ ID كاحتياطي
-        Object.entries(menuItemIds).forEach(function([id, label]) {
-            const li = document.getElementById(id);
-            if (!li) return;
-            const link = li.querySelector('a[aria-label]');
-            if (!link || link.querySelector('.menu-icon-injected')) return;
-            const span = link.querySelector('span');
-            if (!span) return;
-            const iconEl = document.createElement('span');
-            iconEl.className = 'menu-icon-injected';
-            iconEl.innerHTML = icons[label];
-            iconEl.style.cssText = 'display:inline-flex;align-items:center;';
-            span.style.cssText = 'display:inline-flex;align-items:center;gap:6px;';
+            
+            // في اللغة الإنجليزية، نفضل وضع الأيقونة قبل النص، الكود يدعم الاتجاهين تلقائياً
             span.insertBefore(iconEl, span.firstChild);
         });
  
@@ -672,68 +616,13 @@
         installContactClickGuard();
     }
  
-    // إعادة المحاولة لتغطية الرندر المتأخر
     setTimeout(injectMenuIcons, 500);
     setTimeout(injectMenuIcons, 1500);
     setTimeout(injectMenuIcons, 3000);
     setInterval(forceContactLinks, 1000);
  
-    // MutationObserver لرصد أي تغيير في DOM بعد التحميل
     const observer = new MutationObserver(function() {
         injectMenuIcons();
     });
     observer.observe(document.body, { childList: true, subtree: true });
-})();
- // === Universal Icons Patch (Language-independent) ===
-(function() {
-    'use strict';
-
-    const ICONS = {
-        whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>`,
-
-        phone: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;" fill="#1e7ba6"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>`,
-
-        email: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;" fill="#e74c3c"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
-
-        telegram: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;vertical-align:middle;margin-left:6px;" fill="#229ED9"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0z"/></svg>`
-    };
-
-    function detectType(link) {
-        const href = (link.getAttribute('href') || '').toLowerCase();
-
-        if (href.includes('wa.me') || href.includes('whatsapp')) return 'whatsapp';
-        if (href.startsWith('tel:')) return 'phone';
-        if (href.startsWith('mailto:')) return 'email';
-        if (href.includes('t.me') || href.includes('telegram')) return 'telegram';
-
-        return null;
-    }
-
-    function addIcons() {
-        document.querySelectorAll('a').forEach(link => {
-            if (link.querySelector('.auto-icon')) return;
-
-            const type = detectType(link);
-            if (!type || !ICONS[type]) return;
-
-            const span = link.querySelector('span') || link;
-            const icon = document.createElement('span');
-
-            icon.className = 'auto-icon';
-            icon.innerHTML = ICONS[type];
-            icon.style.marginInlineEnd = '6px';
-
-            span.insertBefore(icon, span.firstChild);
-        });
-    }
-
-    addIcons();
-    setTimeout(addIcons, 1000);
-    setInterval(addIcons, 3000);
-
-    new MutationObserver(addIcons).observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-
 })();
