@@ -84,8 +84,7 @@
     // ─────────────────────────────
     var T = {
         ar: {
-            h1: 'حلول برمجية',
-            h2: 'متكاملة لأعمالك',
+            h1: 'حلول برمجية متكاملة لأعمالك',
             cta: 'احصل على نسختك التجريبية الآن',
 
             formTitle: 'احصل على نسختك التجريبية',
@@ -116,8 +115,7 @@
         },
 
         en: {
-            h1: 'Integrated Software',
-            h2: 'Solutions for Your Business',
+            h1: 'Integrated Software Solutions For Your Business',
             cta: 'Get Your Free Trial Now',
 
             formTitle: 'Get Your Free Trial',
@@ -216,44 +214,20 @@
 
             align-items:center;
 
-            justify-content:space-between;
+            justify-content:center;
 
-            gap:50px;
+            text-align:center;
 
-            padding:48px 56px;
+            padding:52px 40px;
 
-            background:
-            linear-gradient(
-                135deg,
-                #0f6da8 0%,
-                #1f84c3 45%,
-                #3aa8ea 100%
-            );
+            background:#0f6da8;
 
-            min-height:250px;
+            min-height:220px;
 
             box-shadow:
             0 12px 30px rgba(0,0,0,.08);
 
             cursor:pointer;
-        }
-
-        #brm-banner::before{
-            content:'';
-
-            position:absolute;
-
-            width:460px;
-            height:460px;
-
-            background:rgba(255,255,255,.08);
-
-            border-radius:50%;
-
-            top:-180px;
-            left:-140px;
-
-            filter:blur(10px);
         }
 
         #brm-banner::after{
@@ -264,13 +238,13 @@
 
             background-image:
             radial-gradient(
-                rgba(255,255,255,.10) 1px,
+                rgba(255,255,255,.08) 1px,
                 transparent 1px
             );
 
             background-size:24px 24px;
 
-            opacity:.25;
+            opacity:.2;
         }
 
         /* =========================
@@ -282,38 +256,32 @@
 
             z-index:2;
 
-            flex:1;
+            display:flex;
 
-            ${isArabic ? 'text-align:right;' : 'text-align:left;'}
+            flex-direction:column;
+
+            align-items:center;
+
+            justify-content:center;
         }
 
         #brm-text h1{
             margin:0;
 
-            font-size:54px;
+            font-size:52px;
 
-            line-height:1.1;
+            line-height:1.3;
 
             color:#fff;
 
             font-weight:900;
         }
 
-        #brm-text h2{
-            margin:12px 0 24px;
-
-            font-size:30px;
-
-            line-height:1.4;
-
-            color:rgba(255,255,255,.96);
-
-            font-weight:600;
-        }
-
         /* CTA */
 
         #brm-cta{
+            margin-top:26px;
+
             border:none;
 
             background:#fff;
@@ -338,37 +306,6 @@
 
             box-shadow:
             0 10px 22px rgba(0,0,0,.15);
-        }
-
-        /* =========================
-           LOGO
-        ========================= */
-
-        #brm-logo-side{
-            position:relative;
-
-            z-index:2;
-
-            width:240px;
-
-            flex-shrink:0;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:center;
-        }
-
-        #brm-logo-side img{
-            width:100%;
-
-            max-width:220px;
-
-            object-fit:contain;
-
-            filter:
-            drop-shadow(0 8px 18px rgba(0,0,0,.2));
         }
 
         /* =========================
@@ -652,31 +589,12 @@
             }
 
             #brm-banner{
-                flex-direction:column-reverse;
-
-                text-align:center;
-
-                padding:36px 24px;
-
+                padding:40px 24px;
                 min-height:auto;
-
-                gap:28px;
-            }
-
-            #brm-text{
-                text-align:center !important;
             }
 
             #brm-text h1{
                 font-size:34px;
-            }
-
-            #brm-text h2{
-                font-size:20px;
-            }
-
-            #brm-logo-side{
-                width:160px;
             }
 
             #brm-panel{
@@ -703,19 +621,13 @@
                 <div id="brm-banner" role="button" tabindex="0">
 
                     <div id="brm-text">
+
                         <h1>${t.h1}</h1>
-                        <h2>${t.h2}</h2>
 
                         <button id="brm-cta">
                             ${t.cta}
                         </button>
-                    </div>
 
-                    <div id="brm-logo-side">
-                        <img
-                            src="https://i.postimg.cc/q7WfYxNf/logo-m.png"
-                            alt="Barmajah"
-                        />
                     </div>
 
                 </div>
@@ -980,6 +892,7 @@
 
 })();
 // نهاية الفورم
+
 // Fixed Pricing Plans Section for Salla - Al Mo'taman Lite (Perfect Alignment)
 (function() {
     'use strict';
