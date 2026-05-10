@@ -152,7 +152,7 @@
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbwqQaNvvGrxtL80YjjUaL5vWjOp3P1texiIgNg54_hIMH5NomJtOQT0FJ9VMLe629Eu/exec';
+        'https://script.google.com/macros/s/AKfycbxuIDWDPWBLEMpt6iEmK-3oHJHebU_hhTsFMsDtfZr5SNEsdysmSS7PdgioK288hRU0/exec';
     
 
     // ─────────────────────────────
@@ -851,11 +851,7 @@ async function send(e) {
 
             method:'POST',
 
-            headers:{
-                'Content-Type':'application/json'
-            },
-
-            body:JSON.stringify({
+            body:new URLSearchParams({
 
                 name:name,
                 phone:phone,
@@ -866,6 +862,7 @@ async function send(e) {
                     new Date().toLocaleString(
                         isArabic ? 'ar-SA' : 'en-US'
                     )
+
             })
 
         });
