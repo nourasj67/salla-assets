@@ -153,6 +153,7 @@
     // ─────────────────────────────
     var SCRIPT_URL =
         'https://script.google.com/macros/s/AKfycbzNMF-CMBWDintkJ_WLbvAf5ef-sjbvdFEI4lT64rnumMNNKEfacjp88SUW2vwaVQIE1w/exec';
+    
 
     // ─────────────────────────────
     // CSS
@@ -268,13 +269,13 @@
         #brm-text h1{
             margin:0;
 
-            font-size:52px;
+            font-size:45px;
 
             line-height:1.3;
 
             color:#fff;
 
-            font-weight:900;
+            font-weight:800;
         }
 
         /* CTA */
