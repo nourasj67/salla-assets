@@ -51,7 +51,6 @@
     }
 })();
 
-```javascript
 // بداية فورم
 (function () {
     'use strict';
@@ -667,7 +666,6 @@
 
 })();
 // نهاية الفورم
-```
 
 // Fixed Pricing Plans Section for Salla - Al Mo'taman Lite (Perfect Alignment)
 (function() {
