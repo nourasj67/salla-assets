@@ -51,379 +51,443 @@
     }
 })();
 
-// إضافة فورم
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+// بداية فورم
+(function () {
+    'use strict';
 
-  .brm-wrap {
-    font-family: 'Tajawal', sans-serif;
-    direction: rtl;
-    max-width: 960px;
-    margin: 0 auto;
-  }
+    // ─── كشف لغة الصفحة (متوافق مع بقية الكود) ───────────────────
+    var isArabic = (document.documentElement.lang || 'ar').toLowerCase().startsWith('ar');
+    var currentLang = isArabic ? 'ar' : 'en';
 
-  /* ===== BANNER ===== */
-  .brm-banner {
-    position: relative;
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(110deg, #0c1b2b 0%, #122336 35%, #0a1e35 65%, #0d2540 100%);
-    padding: 38px 50px;
-    min-height: 200px;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-  }
-  .brm-banner:hover { transform: scale(1.008); box-shadow: 0 10px 40px rgba(0,100,180,0.22); }
-
-  /* Ambient glow */
-  .brm-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 72% 50%, rgba(56,160,230,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  /* Subtle grid dots */
-  .brm-banner::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 28px 28px;
-    pointer-events: none;
-  }
-
-  .brm-text { position: relative; z-index: 1; }
-  .brm-text h1 {
-    font-size: 42px;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.15;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-  }
-  .brm-text h2 {
-    font-size: 34px;
-    font-weight: 700;
-    color: #5bc8f7;
-    margin-bottom: 24px;
-    text-shadow: 0 2px 12px rgba(0,80,160,0.3);
-  }
-
-  .brm-cta-btn {
-    display: inline-block;
-    background: rgba(160, 195, 220, 0.25);
-    border: 2px solid rgba(160,200,230,0.55);
-    color: #d6edf8;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    padding: 13px 32px;
-    border-radius: 50px;
-    cursor: pointer;
-    backdrop-filter: blur(4px);
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-    letter-spacing: 0.3px;
-  }
-  .brm-cta-btn:hover {
-    background: rgba(91,200,247,0.3);
-    border-color: #5bc8f7;
-    color: #ffffff;
-  }
-
-  /* Logo side */
-  .brm-logo-side {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-  }
-  .brm-logo-box {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 14px 22px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
-  .brm-logo-icon {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #1460a8, #1a7fd4);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 22px;
-    font-weight: 900;
-  }
-  .brm-logo-text { display: flex; flex-direction: column; }
-  .brm-logo-text span:first-child { font-size: 11px; letter-spacing: 2px; color: #aaa; font-weight: 500; }
-  .brm-logo-text span:last-child { font-size: 22px; font-weight: 800; color: #1460a8; line-height: 1; }
-  .brm-tagline { font-size: 11.5px; color: #7ab4cc; text-align: center; }
-
-  /* ===== FORM PANEL ===== */
-  .brm-form-panel {
-    display: none;
-    margin-top: 10px;
-    background: linear-gradient(150deg, #0c1b2b 0%, #102338 100%);
-    border-radius: 20px;
-    border: 1px solid rgba(91,200,247,0.15);
-    padding: 40px 44px;
-    animation: brmSlide 0.3s ease;
-  }
-  .brm-form-panel.open { display: block; }
-
-  @keyframes brmSlide {
-    from { opacity: 0; transform: translateY(-12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .brm-form-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
-  .brm-form-head h3 { font-size: 24px; font-weight: 800; color: #fff; }
-  .brm-form-head p  { font-size: 13px; color: #6fa8c0; margin-top: 5px; }
-
-  .brm-close {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #6fa8c0;
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.2s, color 0.2s;
-  }
-  .brm-close:hover { background: rgba(91,200,247,0.15); color: #fff; }
-
-  .brm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .brm-field { margin-bottom: 18px; }
-  .brm-field label {
-    display: block;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #8fbfd6;
-    margin-bottom: 8px;
-  }
-  .brm-field input,
-  .brm-field select {
-    width: 100%;
-    padding: 13px 16px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(91,200,247,0.18);
-    border-radius: 10px;
-    color: #fff;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.2s, background 0.2s;
-    direction: rtl;
-  }
-  .brm-field input::placeholder { color: #3d6a88; }
-  .brm-field input:focus,
-  .brm-field select:focus {
-    border-color: #5bc8f7;
-    background: rgba(91,200,247,0.07);
-  }
-  .brm-field select option { background: #102338; color: #fff; }
-
-  .brm-submit {
-    width: 100%;
-    padding: 15px;
-    margin-top: 6px;
-    background: linear-gradient(135deg, #1460a8 0%, #5bc8f7 100%);
-    border: none;
-    border-radius: 12px;
-    color: #fff;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
-    letter-spacing: 0.3px;
-  }
-  .brm-submit:hover   { opacity: 0.9; }
-  .brm-submit:active  { transform: scale(0.99); }
-
-  .brm-note {
-    font-size: 11.5px;
-    color: #3d6a88;
-    text-align: center;
-    margin-top: 14px;
-    line-height: 1.7;
-  }
-
-  /* Success */
-  .brm-success {
-    display: none;
-    text-align: center;
-    padding: 36px 20px;
-    background: rgba(91,200,247,0.07);
-    border-radius: 14px;
-    border: 1px solid rgba(91,200,247,0.2);
-  }
-  .brm-success .brm-check {
-    width: 64px; height: 64px;
-    background: rgba(91,200,247,0.15);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
-    font-size: 30px;
-  }
-  .brm-success h4 { color: #5bc8f7; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-  .brm-success p  { color: #6fa8c0; font-size: 14px; }
-
-  /* Divider */
-  .brm-divider {
-    height: 1px;
-    background: rgba(91,200,247,0.1);
-    margin: 0 0 28px;
-  }
-
-  /* Responsive */
-  @media (max-width: 640px) {
-    .brm-banner { flex-direction: column; gap: 24px; padding: 28px 24px; text-align: center; }
-    .brm-text h1 { font-size: 30px; }
-    .brm-text h2 { font-size: 24px; }
-    .brm-row    { grid-template-columns: 1fr; }
-    .brm-form-panel { padding: 28px 20px; }
-    .brm-logo-side { align-items: center; }
-  }
-</style>
-</head>
-<body style="background:#f0f2f5; padding: 40px 20px;">
-
-<div class="brm-wrap">
-
-  <!-- ===== BANNER ===== -->
-  <div class="brm-banner" onclick="brmToggle()" role="button" tabindex="0" aria-label="احصل على نسختك التجريبية">
-    <div class="brm-text">
-      <h1>حلول برمجية</h1>
-      <h2>متكاملة لأعمالك</h2>
-      <button class="brm-cta-btn" onclick="event.stopPropagation(); brmToggle()">
-        احصل على نسختك التجريبية الآن
-      </button>
-    </div>
-    <div class="brm-logo-side">
-      <img src="https://i.postimg.cc/q7WfYxNf/logo-m.png" alt="برمجة" style="width:190px;height:auto;display:block;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));" />
-      <div class="brm-tagline">مزود معتمد لدى هيئة الزكاة والضريبة والجمارك</div>
-    </div>
-  </div>
-
-  <!-- ===== FORM PANEL ===== -->
-  <div class="brm-form-panel" id="brmPanel">
-    <div class="brm-form-head">
-      <div>
-        <h3>احصل على نسختك التجريبية</h3>
-        <p>سيتواصل معك فريقنا خلال 24 ساعة لتفعيل نسختك</p>
-      </div>
-      <button class="brm-close" onclick="brmToggle()" aria-label="إغلاق">✕</button>
-    </div>
-
-    <div class="brm-divider"></div>
-
-    <div id="brmFormContent">
-      <div class="brm-row">
-        <div class="brm-field">
-          <label for="brmName">الاسم الكامل</label>
-          <input type="text" id="brmName" placeholder="مثال: محمد العمري" />
-        </div>
-        <div class="brm-field">
-          <label for="brmPhone">رقم التواصل</label>
-          <input type="tel" id="brmPhone" placeholder="05xxxxxxxx" />
-        </div>
-      </div>
-      <div class="brm-field">
-        <label for="brmBiz">نوع النشاط التجاري</label>
-        <select id="brmBiz">
-          <option value="">— اختر نوع نشاطك التجاري —</option>
-          <option value="restaurant">🍽️ مطعم</option>
-          <option value="cafe">☕ مقهى</option>
-          <option value="store">🛒 متجر</option>
-          <option value="other">🏢 أخرى</option>
-        </select>
-      </div>
-      <button class="brm-submit" onclick="brmSubmit()">إرسال الطلب ←</button>
-      <p class="brm-note">بياناتك محفوظة بالكامل ولن تُستخدم إلا للتواصل معك بشأن طلبك</p>
-    </div>
-
-    <div class="brm-success" id="brmSuccess">
-      <div class="brm-check">✅</div>
-      <h4>تم إرسال طلبك بنجاح!</h4>
-      <p>سيتواصل معك فريق برمجة قريباً على الرقم الذي أدخلته</p>
-    </div>
-  </div>
-
-</div>
-
-<script>
-  function brmToggle() {
-    var panel = document.getElementById('brmPanel');
-    panel.classList.toggle('open');
-    if (panel.classList.contains('open')) {
-      setTimeout(function(){ panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
-    }
-  }
-
-  function brmSubmit() {
-    var name  = document.getElementById('brmName').value.trim();
-    var phone = document.getElementById('brmPhone').value.trim();
-    var biz   = document.getElementById('brmBiz').value;
-
-    if (!name || !phone || !biz) {
-      alert('يرجى تعبئة جميع الحقول');
-      return;
-    }
+    // ─── نصوص ثنائية اللغة ────────────────────────────────────────
+    var T = {
+        ar: {
+            h1:           'حلول برمجية',
+            h2:           'متكاملة لأعمالك',
+            cta:          'احصل على نسختك التجريبية الآن',
+            tagline:      'مزود معتمد لدى هيئة الزكاة والضريبة والجمارك',
+            formTitle:    'احصل على نسختك التجريبية',
+            formSub:      'سيتواصل معك فريقنا خلال 24 ساعة لتفعيل نسختك',
+            lblName:      'الاسم الكامل',
+            phName:       'مثال: محمد العمري',
+            lblPhone:     'رقم التواصل',
+            phPhone:      '05xxxxxxxx',
+            lblBiz:       'نوع النشاط التجاري',
+            optDefault:   '— اختر نوع نشاطك التجاري —',
+            optR:         '🍽️ مطعم',
+            optC:         '☕ مقهى',
+            optS:         '🛒 متجر',
+            optO:         '🏢 أخرى',
+            submit:       'إرسال الطلب ←',
+            note:         'بياناتك محفوظة بالكامل ولن تُستخدم إلا للتواصل معك بشأن طلبك',
+            alert:        'يرجى تعبئة جميع الحقول',
+            successTitle: 'تم إرسال طلبك بنجاح!',
+            successSub:   'سيتواصل معك فريق برمجة قريباً على الرقم الذي أدخلته',
+            toggleBtn:    'English'
+        },
+        en: {
+            h1:           'Integrated Software',
+            h2:           'Solutions for Your Business',
+            cta:          'Get Your Free Trial Now',
+            tagline:      'Certified provider by ZATCA (Zakat, Tax & Customs Authority)',
+            formTitle:    'Get Your Free Trial',
+            formSub:      'Our team will contact you within 24 hours to activate your trial',
+            lblName:      'Full Name',
+            phName:       'e.g. John Smith',
+            lblPhone:     'Phone Number',
+            phPhone:      '+966 5x xxx xxxx',
+            lblBiz:       'Business Type',
+            optDefault:   '— Select your business type —',
+            optR:         '🍽️ Restaurant',
+            optC:         '☕ Café',
+            optS:         '🛒 Store',
+            optO:         '🏢 Other',
+            submit:       'Submit Request →',
+            note:         'Your data is fully protected and will only be used to follow up on your request',
+            alert:        'Please fill in all fields',
+            successTitle: 'Request Sent Successfully!',
+            successSub:   'The Barmajah team will contact you shortly on the number you provided',
+            toggleBtn:    'العربية'
+        }
+    };
 
     var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNMF-CMBWDintkJ_WLbvAf5ef-sjbvdFEI4lT64rnumMNNKEfacjp88SUW2vwaVQIE1w/exec';
 
-    // أظهر رسالة النجاح فوراً دون انتظار الاستجابة
-    document.getElementById('brmFormContent').style.display = 'none';
-    document.getElementById('brmSuccess').style.display = 'block';
+    // ─── HTML ──────────────────────────────────────────────────────
+    var html = `
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
 
-    // أرسل البيانات لـ Google Sheets في الخلفية
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name:     name,
-        phone:    phone,
-        business: biz,
-        timestamp: new Date().toLocaleString('ar-SA')
-      })
-    })
-    .catch(function(e){ console.warn('خطأ في الإرسال:', e); });
-  }
-</script>
+            #brm-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
 
-</body>
-</html>
+            #brm-wrap {
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            #brm-wrap.ar { direction: rtl; font-family: 'Tajawal', sans-serif; }
+            #brm-wrap.en { direction: ltr; font-family: 'Plus Jakarta Sans', sans-serif; }
 
+            /* Lang toggle */
+            .brm-lang-toggle {
+                display: flex;
+                margin-bottom: 10px;
+            }
+            #brm-wrap.ar  .brm-lang-toggle { justify-content: flex-start; }
+            #brm-wrap.en  .brm-lang-toggle { justify-content: flex-end; }
+            .brm-lang-btn {
+                background: rgba(91,200,247,0.1);
+                border: 1px solid rgba(91,200,247,0.3);
+                color: #5bc8f7;
+                font-family: 'Tajawal','Plus Jakarta Sans',sans-serif;
+                font-size: 13px;
+                font-weight: 600;
+                padding: 6px 16px;
+                border-radius: 30px;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            .brm-lang-btn:hover { background: rgba(91,200,247,0.2); }
 
+            /* Banner */
+            .brm-banner {
+                position: relative;
+                width: 100%;
+                border-radius: 20px;
+                overflow: hidden;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: linear-gradient(110deg, #0c1b2b 0%, #122336 35%, #0a1e35 65%, #0d2540 100%);
+                padding: 38px 50px;
+                min-height: 200px;
+                transition: transform 0.18s ease, box-shadow 0.18s ease;
+            }
+            .brm-banner:hover { transform: scale(1.008); box-shadow: 0 10px 40px rgba(0,100,180,0.22); }
+            .brm-banner::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse 60% 80% at 72% 50%, rgba(56,160,230,0.12) 0%, transparent 70%);
+                pointer-events: none;
+            }
+            .brm-banner::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+                background-size: 28px 28px;
+                pointer-events: none;
+            }
 
+            .brm-text { position: relative; z-index: 1; }
+            .brm-text h1 {
+                font-size: 42px; font-weight: 800; color: #fff;
+                line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            }
+            .brm-text h2 {
+                font-size: 34px; font-weight: 700; color: #5bc8f7;
+                margin-bottom: 24px; text-shadow: 0 2px 12px rgba(0,80,160,0.3);
+            }
+            .brm-cta-btn {
+                display: inline-block;
+                background: rgba(160,195,220,0.25);
+                border: 2px solid rgba(160,200,230,0.55);
+                color: #d6edf8; font-size: 17px; font-weight: 700;
+                padding: 13px 32px; border-radius: 50px; cursor: pointer;
+                backdrop-filter: blur(4px);
+                transition: background 0.2s, color 0.2s, border-color 0.2s;
+                font-family: inherit;
+            }
+            .brm-cta-btn:hover { background: rgba(91,200,247,0.3); border-color: #5bc8f7; color: #fff; }
+
+            .brm-logo-side {
+                position: relative; z-index: 1;
+                display: flex; flex-direction: column;
+                align-items: center; gap: 12px; flex-shrink: 0;
+            }
+            .brm-tagline { font-size: 11.5px; color: #7ab4cc; text-align: center; max-width: 200px; line-height: 1.5; }
+
+            /* Form panel */
+            .brm-form-panel {
+                display: none; margin-top: 10px;
+                background: linear-gradient(150deg, #0c1b2b 0%, #102338 100%);
+                border-radius: 20px; border: 1px solid rgba(91,200,247,0.15);
+                padding: 40px 44px;
+                animation: brmSlide 0.3s ease;
+            }
+            .brm-form-panel.open { display: block; }
+            @keyframes brmSlide {
+                from { opacity: 0; transform: translateY(-12px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+
+            .brm-form-head {
+                display: flex; align-items: flex-start;
+                justify-content: space-between; margin-bottom: 30px;
+            }
+            .brm-form-head h3 { font-size: 24px; font-weight: 800; color: #fff; }
+            .brm-form-head p  { font-size: 13px; color: #6fa8c0; margin-top: 5px; }
+
+            .brm-close {
+                background: rgba(255,255,255,0.07);
+                border: 1px solid rgba(255,255,255,0.1);
+                color: #6fa8c0; width: 38px; height: 38px;
+                border-radius: 50%; font-size: 18px; cursor: pointer;
+                display: flex; align-items: center; justify-content: center;
+                flex-shrink: 0; transition: background 0.2s, color 0.2s;
+            }
+            .brm-close:hover { background: rgba(91,200,247,0.15); color: #fff; }
+
+            .brm-divider { height: 1px; background: rgba(91,200,247,0.1); margin: 0 0 28px; }
+
+            .brm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+            .brm-field { margin-bottom: 18px; }
+            .brm-field label {
+                display: block; font-size: 13.5px; font-weight: 600;
+                color: #8fbfd6; margin-bottom: 8px;
+            }
+            .brm-field input, .brm-field select {
+                width: 100%; padding: 13px 16px;
+                background: rgba(255,255,255,0.06);
+                border: 1px solid rgba(91,200,247,0.18);
+                border-radius: 10px; color: #fff;
+                font-size: 15px; font-family: inherit; outline: none;
+                transition: border-color 0.2s, background 0.2s;
+            }
+            #brm-wrap.ar .brm-field input,
+            #brm-wrap.ar .brm-field select { direction: rtl; }
+            #brm-wrap.en .brm-field input,
+            #brm-wrap.en .brm-field select { direction: ltr; }
+            .brm-field input::placeholder { color: #3d6a88; }
+            .brm-field input:focus, .brm-field select:focus {
+                border-color: #5bc8f7; background: rgba(91,200,247,0.07);
+            }
+            .brm-field select option { background: #102338; color: #fff; }
+
+            .brm-submit {
+                width: 100%; padding: 15px; margin-top: 6px;
+                background: linear-gradient(135deg, #1460a8 0%, #5bc8f7 100%);
+                border: none; border-radius: 12px; color: #fff;
+                font-size: 18px; font-weight: 700; font-family: inherit;
+                cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+            }
+            .brm-submit:hover  { opacity: 0.9; }
+            .brm-submit:active { transform: scale(0.99); }
+
+            .brm-note {
+                font-size: 11.5px; color: #3d6a88;
+                text-align: center; margin-top: 14px; line-height: 1.7;
+            }
+
+            /* Success */
+            .brm-success {
+                display: none; text-align: center; padding: 36px 20px;
+                background: rgba(91,200,247,0.07); border-radius: 14px;
+                border: 1px solid rgba(91,200,247,0.2);
+            }
+            .brm-check {
+                width: 64px; height: 64px;
+                background: rgba(91,200,247,0.15); border-radius: 50%;
+                display: flex; align-items: center; justify-content: center;
+                margin: 0 auto 16px; font-size: 30px;
+            }
+            .brm-success h4 { color: #5bc8f7; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+            .brm-success p  { color: #6fa8c0; font-size: 14px; }
+
+            @media (max-width: 640px) {
+                .brm-banner { flex-direction: column; gap: 24px; padding: 28px 24px; text-align: center; }
+                .brm-text h1 { font-size: 28px; }
+                .brm-text h2 { font-size: 22px; }
+                .brm-row     { grid-template-columns: 1fr; }
+                .brm-form-panel { padding: 28px 20px; }
+            }
+        </style>
+
+        <div id="brm-wrap">
+
+            <div class="brm-lang-toggle">
+                <button class="brm-lang-btn" id="brmLangBtn"></button>
+            </div>
+
+            <div class="brm-banner" id="brmBanner" role="button" tabindex="0">
+                <div class="brm-text">
+                    <h1 id="brmH1"></h1>
+                    <h2 id="brmH2"></h2>
+                    <button class="brm-cta-btn" id="brmCtaBtn"></button>
+                </div>
+                <div class="brm-logo-side">
+                    <img src="https://i.postimg.cc/q7WfYxNf/logo-m.png" alt="Barmajah"
+                         style="width:190px;height:auto;display:block;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));" />
+                    <div class="brm-tagline" id="brmTagline"></div>
+                </div>
+            </div>
+
+            <div class="brm-form-panel" id="brmPanel">
+                <div class="brm-form-head">
+                    <div>
+                        <h3 id="brmFormTitle"></h3>
+                        <p  id="brmFormSub"></p>
+                    </div>
+                    <button class="brm-close" id="brmCloseBtn">✕</button>
+                </div>
+                <div class="brm-divider"></div>
+
+                <div id="brmFormContent">
+                    <div class="brm-row">
+                        <div class="brm-field">
+                            <label id="brmLblName" for="brmName"></label>
+                            <input type="text" id="brmName" />
+                        </div>
+                        <div class="brm-field">
+                            <label id="brmLblPhone" for="brmPhone"></label>
+                            <input type="tel" id="brmPhone" />
+                        </div>
+                    </div>
+                    <div class="brm-field">
+                        <label id="brmLblBiz" for="brmBiz"></label>
+                        <select id="brmBiz">
+                            <option value=""          id="brmOptDefault"></option>
+                            <option value="restaurant" id="brmOptR"></option>
+                            <option value="cafe"       id="brmOptC"></option>
+                            <option value="store"      id="brmOptS"></option>
+                            <option value="other"      id="brmOptO"></option>
+                        </select>
+                    </div>
+                    <button class="brm-submit" id="brmSubmitBtn"></button>
+                    <p class="brm-note" id="brmNoteText"></p>
+                </div>
+
+                <div class="brm-success" id="brmSuccess">
+                    <div class="brm-check">✅</div>
+                    <h4 id="brmSuccessTitle"></h4>
+                    <p  id="brmSuccessSub"></p>
+                </div>
+            </div>
+
+        </div>
+    `;
+
+    // ─── حقن HTML في الصفحة ───────────────────────────────────────
+    function injectBanner() {
+        var container = document.createElement('div');
+        container.innerHTML = html;
+
+        // ابحث عن نفس الـ target section اللي يستخدمها بقية الكود
+        var target = document.querySelector('.s-block.s-block--fixed-banner.wide-placeholder');
+        if (target) {
+            target.insertAdjacentElement('beforebegin', container);
+        } else {
+            // fallback: ضعه في بداية الـ body
+            document.body.prepend(container);
+        }
+
+        bindEvents();
+        applyLang();
+    }
+
+    // ─── ربط الأحداث ──────────────────────────────────────────────
+    function bindEvents() {
+        document.getElementById('brmBanner').addEventListener('click', toggleForm);
+        document.getElementById('brmCtaBtn').addEventListener('click', function (e) {
+            e.stopPropagation();
+            toggleForm();
+        });
+        document.getElementById('brmCloseBtn').addEventListener('click', toggleForm);
+        document.getElementById('brmSubmitBtn').addEventListener('click', submitForm);
+        document.getElementById('brmLangBtn').addEventListener('click', switchLang);
+    }
+
+    // ─── تطبيق اللغة ──────────────────────────────────────────────
+    function applyLang() {
+        var t    = T[currentLang];
+        var wrap = document.getElementById('brm-wrap');
+
+        wrap.className = currentLang;
+
+        document.getElementById('brmH1').textContent           = t.h1;
+        document.getElementById('brmH2').textContent           = t.h2;
+        document.getElementById('brmCtaBtn').textContent       = t.cta;
+        document.getElementById('brmTagline').textContent      = t.tagline;
+        document.getElementById('brmFormTitle').textContent    = t.formTitle;
+        document.getElementById('brmFormSub').textContent      = t.formSub;
+        document.getElementById('brmLblName').textContent      = t.lblName;
+        document.getElementById('brmName').placeholder         = t.phName;
+        document.getElementById('brmLblPhone').textContent     = t.lblPhone;
+        document.getElementById('brmPhone').placeholder        = t.phPhone;
+        document.getElementById('brmLblBiz').textContent       = t.lblBiz;
+        document.getElementById('brmOptDefault').textContent   = t.optDefault;
+        document.getElementById('brmOptR').textContent         = t.optR;
+        document.getElementById('brmOptC').textContent         = t.optC;
+        document.getElementById('brmOptS').textContent         = t.optS;
+        document.getElementById('brmOptO').textContent         = t.optO;
+        document.getElementById('brmSubmitBtn').textContent    = t.submit;
+        document.getElementById('brmNoteText').textContent     = t.note;
+        document.getElementById('brmSuccessTitle').textContent = t.successTitle;
+        document.getElementById('brmSuccessSub').textContent   = t.successSub;
+        document.getElementById('brmLangBtn').textContent      = t.toggleBtn;
+
+        var toggle = document.querySelector('.brm-lang-toggle');
+        if (toggle) toggle.style.justifyContent = currentLang === 'ar' ? 'flex-start' : 'flex-end';
+    }
+
+    // ─── تبديل اللغة يدوياً ───────────────────────────────────────
+    function switchLang() {
+        currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        applyLang();
+    }
+
+    // ─── فتح/إغلاق الفورم ────────────────────────────────────────
+    function toggleForm() {
+        var panel = document.getElementById('brmPanel');
+        panel.classList.toggle('open');
+        if (panel.classList.contains('open')) {
+            setTimeout(function () {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 50);
+        }
+    }
+
+    // ─── إرسال الفورم ────────────────────────────────────────────
+    function submitForm() {
+        var name  = document.getElementById('brmName').value.trim();
+        var phone = document.getElementById('brmPhone').value.trim();
+        var biz   = document.getElementById('brmBiz').value;
+
+        if (!name || !phone || !biz) {
+            alert(T[currentLang].alert);
+            return;
+        }
+
+        document.getElementById('brmFormContent').style.display = 'none';
+        document.getElementById('brmSuccess').style.display     = 'block';
+
+        fetch(SCRIPT_URL, {
+            method:  'POST',
+            mode:    'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name:      name,
+                phone:     phone,
+                business:  biz,
+                lang:      currentLang,
+                timestamp: new Date().toLocaleString(currentLang === 'ar' ? 'ar-SA' : 'en-US')
+            })
+        })
+        .catch(function (e) { console.warn('Send error:', e); });
+    }
+
+    // ─── تشغيل ───────────────────────────────────────────────────
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', injectBanner);
+    } else {
+        injectBanner();
+    }
+
+})();
 // نهاية الفورم
- 
+
 // Fixed Pricing Plans Section for Salla - Al Mo'taman Lite (Perfect Alignment)
 (function() {
     'use strict';
