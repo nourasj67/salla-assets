@@ -152,7 +152,7 @@
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycby-FqsGlXMAilC0ZwHqnlJIVGwNW-6a0lXGWkwXzQ_hv7rLwCM6FCSXe7L5fa29uKpcqA/exec';
+        'https://script.google.com/macros/s/AKfycbz-8SkffsTSTK0bUHNruQ6ABxRrQXVgBPvgbKj6jSsOiKgL5TYcolVzzcfwOsgVhyfj/exec';
     
 
     // ─────────────────────────────
