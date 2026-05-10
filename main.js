@@ -55,11 +55,16 @@
 (function () {
     'use strict';
 
-    // ─── كشف لغة الصفحة (متوافق مع بقية الكود) ───────────────────
-    var isArabic = (document.documentElement.lang || 'ar').toLowerCase().startsWith('ar');
-    var currentLang = isArabic ? 'ar' : 'en';
+    // ─── تشغيل فقط في الصفحة الرئيسية ───────────────────────────
+    var path = window.location.pathname.replace(/\/$/, '');
+    var isHome = path === '' || path === '/ar' || path === '/en' || path === '/ar/' || path === '/en/';
+    if (!isHome) return;
 
-    // ─── نصوص ثنائية اللغة ────────────────────────────────────────
+    // ─── كشف لغة الصفحة من سلة مباشرة ───────────────────────────
+    var isArabic = (document.documentElement.lang || 'ar').toLowerCase().startsWith('ar');
+    var lang = isArabic ? 'ar' : 'en';
+
+    // ─── نصوص ─────────────────────────────────────────────────────
     var T = {
         ar: {
             h1:           'حلول برمجية',
@@ -78,12 +83,11 @@
             optC:         '☕ مقهى',
             optS:         '🛒 متجر',
             optO:         '🏢 أخرى',
-            submit:       'إرسال الطلب ←',
+            submit:       'إرسال الطلب',
             note:         'بياناتك محفوظة بالكامل ولن تُستخدم إلا للتواصل معك بشأن طلبك',
             alert:        'يرجى تعبئة جميع الحقول',
             successTitle: 'تم إرسال طلبك بنجاح!',
-            successSub:   'سيتواصل معك فريق برمجة قريباً على الرقم الذي أدخلته',
-            toggleBtn:    'English'
+            successSub:   'سيتواصل معك فريق برمجة قريباً على الرقم الذي أدخلته'
         },
         en: {
             h1:           'Integrated Software',
@@ -102,366 +106,368 @@
             optC:         '☕ Café',
             optS:         '🛒 Store',
             optO:         '🏢 Other',
-            submit:       'Submit Request →',
-            note:         'Your data is fully protected and will only be used to follow up on your request',
+            submit:       'Submit Request',
+            note:         'Your data is fully protected and used only to follow up on your request',
             alert:        'Please fill in all fields',
             successTitle: 'Request Sent Successfully!',
-            successSub:   'The Barmajah team will contact you shortly on the number you provided',
-            toggleBtn:    'العربية'
+            successSub:   'The Barmajah team will contact you shortly on the number you provided'
         }
     };
 
+    var t = T[lang];
     var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNMF-CMBWDintkJ_WLbvAf5ef-sjbvdFEI4lT64rnumMNNKEfacjp88SUW2vwaVQIE1w/exec';
 
+    // ─── CSS ───────────────────────────────────────────────────────
+    var css = `
+        #brm-section {
+            width: 100%;
+            padding: 0 0 8px 0;
+        }
+
+        /* مطابق لعرض container ثيم رائد */
+        #brm-inner {
+            max-width: 870px;
+            margin: 0 auto;
+            padding: 0 15px;
+            direction: ${isArabic ? 'rtl' : 'ltr'};
+            font-family: ${isArabic ? "'Tajawal', 'Cairo', sans-serif" : "'Plus Jakarta Sans', sans-serif"};
+        }
+
+        /* Banner */
+        #brm-banner {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(110deg, #0c1b2b 0%, #122336 40%, #0d2540 100%);
+            padding: 28px 36px;
+            min-height: 160px;
+            transition: box-shadow 0.2s ease;
+            gap: 20px;
+        }
+        #brm-banner:hover {
+            box-shadow: 0 8px 32px rgba(0,100,180,0.2);
+        }
+        #brm-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 55% 80% at ${isArabic ? '75%' : '25%'} 50%, rgba(56,160,230,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        #brm-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+        }
+
+        #brm-text {
+            position: relative;
+            z-index: 1;
+            ${isArabic ? 'text-align: right;' : 'text-align: left;'}
+        }
+        #brm-text h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            margin: 0 0 2px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        }
+        #brm-text h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #5bc8f7;
+            margin: 0 0 18px 0;
+            text-shadow: 0 2px 10px rgba(0,80,160,0.3);
+        }
+        #brm-cta {
+            display: inline-block;
+            background: rgba(150,190,220,0.2);
+            border: 1.5px solid rgba(150,195,228,0.5);
+            color: #cce8f6;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 11px 26px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        #brm-cta:hover {
+            background: rgba(91,200,247,0.28);
+            border-color: #5bc8f7;
+            color: #fff;
+        }
+
+        #brm-logo-side {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        #brm-logo-side img {
+            width: 160px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 3px 12px rgba(0,0,0,0.4));
+        }
+        #brm-tagline {
+            font-size: 10.5px;
+            color: #6fb0ca;
+            text-align: center;
+            max-width: 170px;
+            line-height: 1.5;
+        }
+
+        /* Form panel */
+        #brm-panel {
+            display: none;
+            margin-top: 8px;
+            background: linear-gradient(150deg, #0c1b2b 0%, #0f2238 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(91,200,247,0.13);
+            padding: 32px 36px;
+            animation: brmIn 0.28s ease;
+            direction: ${isArabic ? 'rtl' : 'ltr'};
+        }
+        #brm-panel.open { display: block; }
+
+        @keyframes brmIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        #brm-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        #brm-head h3 { font-size: 20px; font-weight: 800; color: #fff; margin: 0; }
+        #brm-head p  { font-size: 12.5px; color: #6fa8c0; margin: 4px 0 0 0; }
+
+        #brm-close {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #6fa8c0;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.2s, color 0.2s;
+            line-height: 1;
+        }
+        #brm-close:hover { background: rgba(91,200,247,0.15); color: #fff; }
+
+        #brm-divider { height: 1px; background: rgba(91,200,247,0.1); margin: 0 0 24px; }
+
+        #brm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .brm-f  { margin-bottom: 16px; }
+        .brm-f label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #8fbfd6;
+            margin-bottom: 7px;
+        }
+        .brm-f input, .brm-f select {
+            width: 100%;
+            padding: 11px 14px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(91,200,247,0.16);
+            border-radius: 9px;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            direction: ${isArabic ? 'rtl' : 'ltr'};
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .brm-f input::placeholder { color: #3d6a88; }
+        .brm-f input:focus, .brm-f select:focus {
+            border-color: #5bc8f7;
+            background: rgba(91,200,247,0.06);
+        }
+        .brm-f select option { background: #0f2238; color: #fff; }
+
+        #brm-submit {
+            width: 100%;
+            padding: 13px;
+            margin-top: 4px;
+            background: linear-gradient(135deg, #1460a8, #5bc8f7);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        #brm-submit:hover  { opacity: 0.9; }
+        #brm-submit:active { transform: scale(0.99); }
+
+        #brm-note {
+            font-size: 11px;
+            color: #3a6480;
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        #brm-success {
+            display: none;
+            text-align: center;
+            padding: 32px 16px;
+            background: rgba(91,200,247,0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(91,200,247,0.18);
+        }
+        #brm-check {
+            width: 58px; height: 58px;
+            background: rgba(91,200,247,0.13);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 14px;
+            font-size: 26px;
+        }
+        #brm-success h4 { color: #5bc8f7; font-size: 20px; font-weight: 700; margin: 0 0 6px; }
+        #brm-success p  { color: #6fa8c0; font-size: 13px; margin: 0; }
+
+        @media (max-width: 600px) {
+            #brm-banner { flex-direction: column; padding: 22px 20px; text-align: center; min-height: auto; }
+            #brm-text   { text-align: center !important; }
+            #brm-text h1 { font-size: 24px; }
+            #brm-text h2 { font-size: 20px; }
+            #brm-logo-side img { width: 130px; }
+            #brm-row    { grid-template-columns: 1fr; }
+            #brm-panel  { padding: 24px 18px; }
+        }
+    `;
+
     // ─── HTML ──────────────────────────────────────────────────────
-    var html = `
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
+    var markup = `
+        <style>${css}</style>
+        <div id="brm-section">
+            <div id="brm-inner">
 
-            #brm-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
-
-            #brm-wrap {
-                max-width: 960px;
-                margin: 0 auto;
-                padding: 20px;
-            }
-            #brm-wrap.ar { direction: rtl; font-family: 'Tajawal', sans-serif; }
-            #brm-wrap.en { direction: ltr; font-family: 'Plus Jakarta Sans', sans-serif; }
-
-            /* Lang toggle */
-            .brm-lang-toggle {
-                display: flex;
-                margin-bottom: 10px;
-            }
-            #brm-wrap.ar  .brm-lang-toggle { justify-content: flex-start; }
-            #brm-wrap.en  .brm-lang-toggle { justify-content: flex-end; }
-            .brm-lang-btn {
-                background: rgba(91,200,247,0.1);
-                border: 1px solid rgba(91,200,247,0.3);
-                color: #5bc8f7;
-                font-family: 'Tajawal','Plus Jakarta Sans',sans-serif;
-                font-size: 13px;
-                font-weight: 600;
-                padding: 6px 16px;
-                border-radius: 30px;
-                cursor: pointer;
-                transition: background 0.2s;
-            }
-            .brm-lang-btn:hover { background: rgba(91,200,247,0.2); }
-
-            /* Banner */
-            .brm-banner {
-                position: relative;
-                width: 100%;
-                border-radius: 20px;
-                overflow: hidden;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                background: linear-gradient(110deg, #0c1b2b 0%, #122336 35%, #0a1e35 65%, #0d2540 100%);
-                padding: 38px 50px;
-                min-height: 200px;
-                transition: transform 0.18s ease, box-shadow 0.18s ease;
-            }
-            .brm-banner:hover { transform: scale(1.008); box-shadow: 0 10px 40px rgba(0,100,180,0.22); }
-            .brm-banner::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: radial-gradient(ellipse 60% 80% at 72% 50%, rgba(56,160,230,0.12) 0%, transparent 70%);
-                pointer-events: none;
-            }
-            .brm-banner::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
-                background-size: 28px 28px;
-                pointer-events: none;
-            }
-
-            .brm-text { position: relative; z-index: 1; }
-            .brm-text h1 {
-                font-size: 42px; font-weight: 800; color: #fff;
-                line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-            }
-            .brm-text h2 {
-                font-size: 34px; font-weight: 700; color: #5bc8f7;
-                margin-bottom: 24px; text-shadow: 0 2px 12px rgba(0,80,160,0.3);
-            }
-            .brm-cta-btn {
-                display: inline-block;
-                background: rgba(160,195,220,0.25);
-                border: 2px solid rgba(160,200,230,0.55);
-                color: #d6edf8; font-size: 17px; font-weight: 700;
-                padding: 13px 32px; border-radius: 50px; cursor: pointer;
-                backdrop-filter: blur(4px);
-                transition: background 0.2s, color 0.2s, border-color 0.2s;
-                font-family: inherit;
-            }
-            .brm-cta-btn:hover { background: rgba(91,200,247,0.3); border-color: #5bc8f7; color: #fff; }
-
-            .brm-logo-side {
-                position: relative; z-index: 1;
-                display: flex; flex-direction: column;
-                align-items: center; gap: 12px; flex-shrink: 0;
-            }
-            .brm-tagline { font-size: 11.5px; color: #7ab4cc; text-align: center; max-width: 200px; line-height: 1.5; }
-
-            /* Form panel */
-            .brm-form-panel {
-                display: none; margin-top: 10px;
-                background: linear-gradient(150deg, #0c1b2b 0%, #102338 100%);
-                border-radius: 20px; border: 1px solid rgba(91,200,247,0.15);
-                padding: 40px 44px;
-                animation: brmSlide 0.3s ease;
-            }
-            .brm-form-panel.open { display: block; }
-            @keyframes brmSlide {
-                from { opacity: 0; transform: translateY(-12px); }
-                to   { opacity: 1; transform: translateY(0); }
-            }
-
-            .brm-form-head {
-                display: flex; align-items: flex-start;
-                justify-content: space-between; margin-bottom: 30px;
-            }
-            .brm-form-head h3 { font-size: 24px; font-weight: 800; color: #fff; }
-            .brm-form-head p  { font-size: 13px; color: #6fa8c0; margin-top: 5px; }
-
-            .brm-close {
-                background: rgba(255,255,255,0.07);
-                border: 1px solid rgba(255,255,255,0.1);
-                color: #6fa8c0; width: 38px; height: 38px;
-                border-radius: 50%; font-size: 18px; cursor: pointer;
-                display: flex; align-items: center; justify-content: center;
-                flex-shrink: 0; transition: background 0.2s, color 0.2s;
-            }
-            .brm-close:hover { background: rgba(91,200,247,0.15); color: #fff; }
-
-            .brm-divider { height: 1px; background: rgba(91,200,247,0.1); margin: 0 0 28px; }
-
-            .brm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-            .brm-field { margin-bottom: 18px; }
-            .brm-field label {
-                display: block; font-size: 13.5px; font-weight: 600;
-                color: #8fbfd6; margin-bottom: 8px;
-            }
-            .brm-field input, .brm-field select {
-                width: 100%; padding: 13px 16px;
-                background: rgba(255,255,255,0.06);
-                border: 1px solid rgba(91,200,247,0.18);
-                border-radius: 10px; color: #fff;
-                font-size: 15px; font-family: inherit; outline: none;
-                transition: border-color 0.2s, background 0.2s;
-            }
-            #brm-wrap.ar .brm-field input,
-            #brm-wrap.ar .brm-field select { direction: rtl; }
-            #brm-wrap.en .brm-field input,
-            #brm-wrap.en .brm-field select { direction: ltr; }
-            .brm-field input::placeholder { color: #3d6a88; }
-            .brm-field input:focus, .brm-field select:focus {
-                border-color: #5bc8f7; background: rgba(91,200,247,0.07);
-            }
-            .brm-field select option { background: #102338; color: #fff; }
-
-            .brm-submit {
-                width: 100%; padding: 15px; margin-top: 6px;
-                background: linear-gradient(135deg, #1460a8 0%, #5bc8f7 100%);
-                border: none; border-radius: 12px; color: #fff;
-                font-size: 18px; font-weight: 700; font-family: inherit;
-                cursor: pointer; transition: opacity 0.2s, transform 0.1s;
-            }
-            .brm-submit:hover  { opacity: 0.9; }
-            .brm-submit:active { transform: scale(0.99); }
-
-            .brm-note {
-                font-size: 11.5px; color: #3d6a88;
-                text-align: center; margin-top: 14px; line-height: 1.7;
-            }
-
-            /* Success */
-            .brm-success {
-                display: none; text-align: center; padding: 36px 20px;
-                background: rgba(91,200,247,0.07); border-radius: 14px;
-                border: 1px solid rgba(91,200,247,0.2);
-            }
-            .brm-check {
-                width: 64px; height: 64px;
-                background: rgba(91,200,247,0.15); border-radius: 50%;
-                display: flex; align-items: center; justify-content: center;
-                margin: 0 auto 16px; font-size: 30px;
-            }
-            .brm-success h4 { color: #5bc8f7; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-            .brm-success p  { color: #6fa8c0; font-size: 14px; }
-
-            @media (max-width: 640px) {
-                .brm-banner { flex-direction: column; gap: 24px; padding: 28px 24px; text-align: center; }
-                .brm-text h1 { font-size: 28px; }
-                .brm-text h2 { font-size: 22px; }
-                .brm-row     { grid-template-columns: 1fr; }
-                .brm-form-panel { padding: 28px 20px; }
-            }
-        </style>
-
-        <div id="brm-wrap">
-
-            <div class="brm-lang-toggle">
-                <button class="brm-lang-btn" id="brmLangBtn"></button>
-            </div>
-
-            <div class="brm-banner" id="brmBanner" role="button" tabindex="0">
-                <div class="brm-text">
-                    <h1 id="brmH1"></h1>
-                    <h2 id="brmH2"></h2>
-                    <button class="brm-cta-btn" id="brmCtaBtn"></button>
-                </div>
-                <div class="brm-logo-side">
-                    <img src="https://i.postimg.cc/q7WfYxNf/logo-m.png" alt="Barmajah"
-                         style="width:190px;height:auto;display:block;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));" />
-                    <div class="brm-tagline" id="brmTagline"></div>
-                </div>
-            </div>
-
-            <div class="brm-form-panel" id="brmPanel">
-                <div class="brm-form-head">
-                    <div>
-                        <h3 id="brmFormTitle"></h3>
-                        <p  id="brmFormSub"></p>
+                <div id="brm-banner" role="button" tabindex="0" aria-label="${t.cta}">
+                    <div id="brm-text">
+                        <h1>${t.h1}</h1>
+                        <h2>${t.h2}</h2>
+                        <button id="brm-cta">${t.cta}</button>
                     </div>
-                    <button class="brm-close" id="brmCloseBtn">✕</button>
+                    <div id="brm-logo-side">
+                        <img src="https://i.postimg.cc/q7WfYxNf/logo-m.png" alt="Barmajah" />
+                        <div id="brm-tagline">${t.tagline}</div>
+                    </div>
                 </div>
-                <div class="brm-divider"></div>
 
-                <div id="brmFormContent">
-                    <div class="brm-row">
-                        <div class="brm-field">
-                            <label id="brmLblName" for="brmName"></label>
-                            <input type="text" id="brmName" />
+                <div id="brm-panel">
+                    <div id="brm-head">
+                        <div>
+                            <h3>${t.formTitle}</h3>
+                            <p>${t.formSub}</p>
                         </div>
-                        <div class="brm-field">
-                            <label id="brmLblPhone" for="brmPhone"></label>
-                            <input type="tel" id="brmPhone" />
+                        <button id="brm-close" aria-label="close">✕</button>
+                    </div>
+                    <div id="brm-divider"></div>
+
+                    <div id="brm-form-content">
+                        <div id="brm-row">
+                            <div class="brm-f">
+                                <label for="brm-name">${t.lblName}</label>
+                                <input type="text" id="brm-name" placeholder="${t.phName}" />
+                            </div>
+                            <div class="brm-f">
+                                <label for="brm-phone">${t.lblPhone}</label>
+                                <input type="tel" id="brm-phone" placeholder="${t.phPhone}" />
+                            </div>
                         </div>
+                        <div class="brm-f">
+                            <label for="brm-biz">${t.lblBiz}</label>
+                            <select id="brm-biz">
+                                <option value="">${t.optDefault}</option>
+                                <option value="restaurant">${t.optR}</option>
+                                <option value="cafe">${t.optC}</option>
+                                <option value="store">${t.optS}</option>
+                                <option value="other">${t.optO}</option>
+                            </select>
+                        </div>
+                        <button id="brm-submit">${t.submit}</button>
+                        <p id="brm-note">${t.note}</p>
                     </div>
-                    <div class="brm-field">
-                        <label id="brmLblBiz" for="brmBiz"></label>
-                        <select id="brmBiz">
-                            <option value=""          id="brmOptDefault"></option>
-                            <option value="restaurant" id="brmOptR"></option>
-                            <option value="cafe"       id="brmOptC"></option>
-                            <option value="store"      id="brmOptS"></option>
-                            <option value="other"      id="brmOptO"></option>
-                        </select>
+
+                    <div id="brm-success">
+                        <div id="brm-check">✅</div>
+                        <h4>${t.successTitle}</h4>
+                        <p>${t.successSub}</p>
                     </div>
-                    <button class="brm-submit" id="brmSubmitBtn"></button>
-                    <p class="brm-note" id="brmNoteText"></p>
                 </div>
 
-                <div class="brm-success" id="brmSuccess">
-                    <div class="brm-check">✅</div>
-                    <h4 id="brmSuccessTitle"></h4>
-                    <p  id="brmSuccessSub"></p>
-                </div>
             </div>
-
         </div>
     `;
 
-    // ─── حقن HTML في الصفحة ───────────────────────────────────────
-    function injectBanner() {
-        var container = document.createElement('div');
-        container.innerHTML = html;
-
-        // ابحث عن نفس الـ target section اللي يستخدمها بقية الكود
+    // ─── حقن في الصفحة ────────────────────────────────────────────
+    function inject() {
         var target = document.querySelector('.s-block.s-block--fixed-banner.wide-placeholder');
         if (target) {
-            target.insertAdjacentElement('beforebegin', container);
+            target.insertAdjacentHTML('beforebegin', markup);
         } else {
-            // fallback: ضعه في بداية الـ body
-            document.body.prepend(container);
+            var main = document.querySelector('main') || document.querySelector('.s-layout-body') || document.body;
+            main.insertAdjacentHTML('afterbegin', markup);
         }
-
         bindEvents();
-        applyLang();
     }
 
-    // ─── ربط الأحداث ──────────────────────────────────────────────
+    // ─── أحداث ────────────────────────────────────────────────────
     function bindEvents() {
-        document.getElementById('brmBanner').addEventListener('click', toggleForm);
-        document.getElementById('brmCtaBtn').addEventListener('click', function (e) {
-            e.stopPropagation();
-            toggleForm();
-        });
-        document.getElementById('brmCloseBtn').addEventListener('click', toggleForm);
-        document.getElementById('brmSubmitBtn').addEventListener('click', submitForm);
-        document.getElementById('brmLangBtn').addEventListener('click', switchLang);
+        var banner = document.getElementById('brm-banner');
+        var cta    = document.getElementById('brm-cta');
+        var close  = document.getElementById('brm-close');
+        var submit = document.getElementById('brm-submit');
+
+        if (banner) banner.addEventListener('click', toggle);
+        if (cta)    cta.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
+        if (close)  close.addEventListener('click', toggle);
+        if (submit) submit.addEventListener('click', send);
     }
 
-    // ─── تطبيق اللغة ──────────────────────────────────────────────
-    function applyLang() {
-        var t    = T[currentLang];
-        var wrap = document.getElementById('brm-wrap');
-
-        wrap.className = currentLang;
-
-        document.getElementById('brmH1').textContent           = t.h1;
-        document.getElementById('brmH2').textContent           = t.h2;
-        document.getElementById('brmCtaBtn').textContent       = t.cta;
-        document.getElementById('brmTagline').textContent      = t.tagline;
-        document.getElementById('brmFormTitle').textContent    = t.formTitle;
-        document.getElementById('brmFormSub').textContent      = t.formSub;
-        document.getElementById('brmLblName').textContent      = t.lblName;
-        document.getElementById('brmName').placeholder         = t.phName;
-        document.getElementById('brmLblPhone').textContent     = t.lblPhone;
-        document.getElementById('brmPhone').placeholder        = t.phPhone;
-        document.getElementById('brmLblBiz').textContent       = t.lblBiz;
-        document.getElementById('brmOptDefault').textContent   = t.optDefault;
-        document.getElementById('brmOptR').textContent         = t.optR;
-        document.getElementById('brmOptC').textContent         = t.optC;
-        document.getElementById('brmOptS').textContent         = t.optS;
-        document.getElementById('brmOptO').textContent         = t.optO;
-        document.getElementById('brmSubmitBtn').textContent    = t.submit;
-        document.getElementById('brmNoteText').textContent     = t.note;
-        document.getElementById('brmSuccessTitle').textContent = t.successTitle;
-        document.getElementById('brmSuccessSub').textContent   = t.successSub;
-        document.getElementById('brmLangBtn').textContent      = t.toggleBtn;
-
-        var toggle = document.querySelector('.brm-lang-toggle');
-        if (toggle) toggle.style.justifyContent = currentLang === 'ar' ? 'flex-start' : 'flex-end';
-    }
-
-    // ─── تبديل اللغة يدوياً ───────────────────────────────────────
-    function switchLang() {
-        currentLang = currentLang === 'ar' ? 'en' : 'ar';
-        applyLang();
-    }
-
-    // ─── فتح/إغلاق الفورم ────────────────────────────────────────
-    function toggleForm() {
-        var panel = document.getElementById('brmPanel');
+    function toggle() {
+        var panel = document.getElementById('brm-panel');
+        if (!panel) return;
         panel.classList.toggle('open');
         if (panel.classList.contains('open')) {
-            setTimeout(function () {
-                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 50);
+            setTimeout(function () { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 40);
         }
     }
 
-    // ─── إرسال الفورم ────────────────────────────────────────────
-    function submitForm() {
-        var name  = document.getElementById('brmName').value.trim();
-        var phone = document.getElementById('brmPhone').value.trim();
-        var biz   = document.getElementById('brmBiz').value;
+    function send() {
+        var name  = (document.getElementById('brm-name')  || {}).value || '';
+        var phone = (document.getElementById('brm-phone') || {}).value || '';
+        var biz   = (document.getElementById('brm-biz')   || {}).value || '';
 
-        if (!name || !phone || !biz) {
-            alert(T[currentLang].alert);
-            return;
-        }
+        name  = name.trim();
+        phone = phone.trim();
 
-        document.getElementById('brmFormContent').style.display = 'none';
-        document.getElementById('brmSuccess').style.display     = 'block';
+        if (!name || !phone || !biz) { alert(t.alert); return; }
+
+        document.getElementById('brm-form-content').style.display = 'none';
+        document.getElementById('brm-success').style.display      = 'block';
 
         fetch(SCRIPT_URL, {
             method:  'POST',
@@ -471,18 +477,17 @@
                 name:      name,
                 phone:     phone,
                 business:  biz,
-                lang:      currentLang,
-                timestamp: new Date().toLocaleString(currentLang === 'ar' ? 'ar-SA' : 'en-US')
+                lang:      lang,
+                timestamp: new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US')
             })
-        })
-        .catch(function (e) { console.warn('Send error:', e); });
+        }).catch(function (e) { console.warn('brm send error:', e); });
     }
 
-    // ─── تشغيل ───────────────────────────────────────────────────
+    // ─── تشغيل ────────────────────────────────────────────────────
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', injectBanner);
+        document.addEventListener('DOMContentLoaded', inject);
     } else {
-        injectBanner();
+        inject();
     }
 
 })();
