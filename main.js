@@ -85,9 +85,9 @@
     var T = {
         ar: {
             h1: 'حلول برمجية متكاملة لأعمالك',
-            cta: 'احصل على نسختك التجريبية الآن',
+            cta: 'اطلب التجربة المجانية',
 
-            formTitle: 'احصل على نسختك التجريبية',
+            formTitle: 'اطلب التجربة المجانية',
             formSub: 'سيتواصل معك فريقنا خلال 24 ساعة لتفعيل نسختك',
 
             lblName: 'الاسم الكامل',
@@ -116,13 +116,13 @@
 
         en: {
             h1: 'Integrated Software Solutions For Your Business',
-            cta: 'Get Your Free Trial Now',
+            cta: 'Get Free Trial Now',
 
-            formTitle: 'Get Your Free Trial',
+            formTitle: 'Get Free Trial',
             formSub: 'Our team will contact you within 24 hours to activate your trial',
 
             lblName: 'Full Name',
-            phName: 'e.g. John Smith',
+            phName: 'e.g. Mohammed Hassan',
 
             lblPhone: 'Phone Number',
             phPhone: '+966 5x xxx xxxx',
@@ -155,589 +155,672 @@
         'https://script.google.com/macros/s/AKfycbxuIDWDPWBLEMpt6iEmK-3oHJHebU_hhTsFMsDtfZr5SNEsdysmSS7PdgioK288hRU0/exec';
     
 
-    // ─────────────────────────────
-    // CSS
-    // ─────────────────────────────
-    var css = `
+// ─────────────────────────────
+// CSS
+// ─────────────────────────────
+var css = `
 
-        body{
-            overflow-x:hidden;
+    body{
+        overflow-x:hidden;
+    }
+
+    #brm-section{
+        width:100vw;
+        max-width:100vw;
+
+        margin-right:calc(50% - 50vw);
+        margin-left:calc(50% - 50vw);
+
+        padding:20px 0;
+
+        background:#f3f5f7;
+    }
+
+    #brm-inner{
+        width:100%;
+        max-width:1450px;
+
+        margin:auto;
+
+        padding:0 24px;
+
+        direction:${isArabic ? 'rtl' : 'ltr'};
+
+        box-sizing:border-box;
+
+        font-family:
+        ${isArabic
+            ? "'Tajawal','Cairo',sans-serif"
+            : "'Plus Jakarta Sans',sans-serif"};
+    }
+
+    #brm-inner *{
+        box-sizing:border-box;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    #brm-banner{
+        position:relative;
+
+        width:100%;
+
+        border-radius:28px;
+
+        overflow:hidden;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        text-align:center;
+
+        padding:58px 40px;
+
+        background:
+        linear-gradient(
+            135deg,
+            #0F4C81 0%,
+            #1167A8 55%,
+            #1C88D9 100%
+        );
+
+        min-height:260px;
+
+        box-shadow:
+        0 12px 30px rgba(0,0,0,.08);
+
+        cursor:pointer;
+    }
+
+    /* NEW GLOW EFFECT */
+
+    #brm-banner::before{
+        content:'';
+
+        position:absolute;
+
+        width:320px;
+        height:320px;
+
+        background:
+        rgba(255,255,255,.08);
+
+        border-radius:50%;
+
+        top:-120px;
+        right:-120px;
+
+        filter:blur(10px);
+
+        z-index:1;
+    }
+
+    #brm-banner::after{
+        content:'';
+
+        position:absolute;
+        inset:0;
+
+        background-image:
+        radial-gradient(
+            rgba(255,255,255,.08) 1px,
+            transparent 1px
+        );
+
+        background-size:24px 24px;
+
+        opacity:.2;
+    }
+
+    /* =========================
+       TEXT
+    ========================= */
+
+    #brm-text{
+        position:relative;
+
+        z-index:2;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        justify-content:center;
+
+        max-width:620px;
+    }
+
+    #brm-text h1{
+        margin:0;
+
+        font-size:48px;
+
+        line-height:1.2;
+
+        letter-spacing:-0.5px;
+
+        color:#F8FAFC;
+
+        font-weight:800;
+
+        text-shadow:
+        0 2px 12px rgba(255,255,255,0.08);
+    }
+
+    /* CTA */
+
+    #brm-cta{
+        margin-top:26px;
+
+        border:none;
+
+        background:#FFFFFF;
+
+        color:#0F4C81;
+
+        height:58px;
+
+        padding:0 32px;
+
+        border-radius:18px;
+
+        font-size:20px;
+
+        font-weight:700;
+
+        cursor:pointer;
+
+        transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+        box-shadow:
+        0 8px 24px rgba(15, 76, 129, 0.12);
+    }
+
+    #brm-cta:hover{
+        transform:translateY(-2px);
+
+        background:#F3F7FB;
+
+        box-shadow:
+        0 10px 22px rgba(0,0,0,.15);
+    }
+
+    /* =========================
+       PANEL
+    ========================= */
+
+    #brm-panel{
+        display:none;
+
+        margin-top:20px;
+
+        background:#fff;
+
+        border-radius:26px;
+
+        padding:36px;
+
+        border:1px solid #d8e8f3;
+
+        box-shadow:
+        0 8px 24px rgba(0,0,0,.05);
+
+        animation:brmFade .25s ease;
+    }
+
+    #brm-panel.open{
+        display:block;
+    }
+
+    @keyframes brmFade{
+        from{
+            opacity:0;
+            transform:translateY(-8px);
         }
 
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+    /* HEADER */
+
+    #brm-head{
+        display:flex;
+
+        align-items:flex-start;
+
+        justify-content:space-between;
+
+        gap:20px;
+
+        margin-bottom:24px;
+    }
+
+    #brm-head h3{
+        margin:0;
+
+        color:#0F4C81;
+
+        font-size:32px;
+
+        line-height:1.2;
+
+        letter-spacing:-0.5px;
+
+        font-weight:800;
+    }
+
+    #brm-head p{
+        margin-top:8px;
+
+        color:#64748B;
+
+        font-size:14px;
+
+        line-height:1.7;
+    }
+
+    /* CLOSE */
+
+    #brm-close{
+        width:42px;
+        height:42px;
+
+        border:none;
+
+        border-radius:12px;
+
+        background:rgba(15,76,129,.08);
+
+        color:#0F4C81;
+
+        font-size:18px;
+
+        cursor:pointer;
+
+        transition:
+        background .2s ease,
+        transform .2s ease;
+    }
+
+    #brm-close:hover{
+        background:rgba(15,76,129,.14);
+
+        transform:translateY(-1px);
+    }
+
+    /* Divider */
+
+    #brm-divider{
+        height:1px;
+
+        background:#edf3f7;
+
+        margin:0 0 28px;
+    }
+
+    /* GRID */
+
+    #brm-row{
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+
+        gap:18px;
+    }
+
+    /* FIELDS */
+
+    .brm-f{
+        margin-bottom:18px;
+    }
+
+    .brm-f label{
+        display:block;
+
+        margin-bottom:10px;
+
+        color:#0F172A;
+
+        font-weight:700;
+
+        font-size:15px;
+    }
+
+    .brm-f input,
+    .brm-f select{
+        width:100%;
+
+        height:56px;
+
+        padding:0 18px;
+
+        border-radius:16px;
+
+        border:1px solid #D9E6F2;
+
+        background:#FFFFFF;
+
+        color:#174d73;
+
+        font-size:16px;
+
+        outline:none;
+
+        transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+    .brm-f input::placeholder{
+        color:#87a4b8;
+    }
+
+    .brm-f input:focus,
+    .brm-f select:focus{
+        border-color:#1C88D9;
+
+        background:#fff;
+
+        box-shadow:
+        0 0 0 4px rgba(28,136,217,.12);
+    }
+
+    .brm-f select option{
+        background:#fff;
+        color:#174d73;
+    }
+
+    /* SUBMIT */
+
+    #brm-submit{
+        width:100%;
+
+        height:58px;
+
+        border:none;
+
+        border-radius:18px;
+
+        padding:0 32px;
+
+        background:#FFFFFF;
+
+        color:#0F4C81;
+
+        font-size:20px;
+
+        font-weight:700;
+
+        cursor:pointer;
+
+        transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+
+        box-shadow:
+        0 8px 24px rgba(15, 76, 129, 0.12);
+    }
+
+    #brm-submit:hover{
+        transform:translateY(-2px);
+
+        background:#F3F7FB;
+
+        box-shadow:
+        0 10px 22px rgba(0,0,0,.10);
+    }
+
+    /* NOTE */
+
+    #brm-note{
+        margin-top:14px;
+
+        text-align:center;
+
+        color:#64748B;
+
+        font-size:14px;
+
+        line-height:1.7;
+    }
+
+    /* SUCCESS */
+
+    #brm-success{
+        display:none;
+
+        text-align:center;
+
+        padding:40px 20px;
+    }
+
+    #brm-check{
+        width:72px;
+        height:72px;
+
+        margin:auto auto 18px;
+
+        border-radius:50%;
+
+        background:#eaf6ff;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        font-size:32px;
+    }
+
+    #brm-success h4{
+        color:#0F4C81;
+
+        font-size:32px;
+
+        line-height:1.2;
+
+        letter-spacing:-0.5px;
+
+        font-weight:800;
+
+        margin:0 0 8px;
+    }
+
+    #brm-success p{
+        color:#64748B;
+
+        margin:0;
+
+        font-size:16px;
+
+        line-height:1.7;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
         #brm-section{
-            width:100vw;
-            max-width:100vw;
-
-            margin-right:calc(50% - 50vw);
-            margin-left:calc(50% - 50vw);
-
-            padding:20px 0;
-
-            background:#f3f5f7;
+            padding:14px 0;
         }
 
         #brm-inner{
-            width:100%;
-            max-width:1450px;
-
-            margin:auto;
-
-            padding:0 24px;
-
-            direction:${isArabic ? 'rtl' : 'ltr'};
-
-            box-sizing:border-box;
-
-            font-family:
-            ${isArabic
-                ? "'Tajawal','Cairo',sans-serif"
-                : "'Plus Jakarta Sans',sans-serif"};
+            padding:0 14px;
         }
-
-        #brm-inner *{
-            box-sizing:border-box;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
 
         #brm-banner{
-            position:relative;
+            padding:40px 24px;
 
-            width:100%;
-
-            border-radius:26px;
-
-            overflow:hidden;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:center;
-
-            text-align:center;
-
-            padding:52px 40px;
-
-            background:#0f6da8;
-
-            min-height:220px;
-
-            box-shadow:
-            0 12px 30px rgba(0,0,0,.08);
-
-            cursor:pointer;
-        }
-
-        #brm-banner::after{
-            content:'';
-
-            position:absolute;
-            inset:0;
-
-            background-image:
-            radial-gradient(
-                rgba(255,255,255,.08) 1px,
-                transparent 1px
-            );
-
-            background-size:24px 24px;
-
-            opacity:.2;
-        }
-
-        /* =========================
-           TEXT
-        ========================= */
-
-        #brm-text{
-            position:relative;
-
-            z-index:2;
-
-            display:flex;
-
-            flex-direction:column;
-
-            align-items:center;
-
-            justify-content:center;
+            min-height:auto;
         }
 
         #brm-text h1{
-            margin:0;
-
-            font-size:45px;
-
-            line-height:1.3;
-
-            color:#fff;
-
-            font-weight:800;
+            font-size:34px;
         }
-
-        /* CTA */
 
         #brm-cta{
-            margin-top:26px;
-
-            border:none;
-
-            background:#fff;
-
-            color:#0f5d94;
-
-            padding:16px 36px;
-
-            border-radius:18px;
+            width:100%;
+            max-width:320px;
 
             font-size:18px;
-
-            font-weight:800;
-
-            cursor:pointer;
-
-            transition:.25s;
         }
-
-        #brm-cta:hover{
-            transform:translateY(-2px);
-
-            box-shadow:
-            0 10px 22px rgba(0,0,0,.15);
-        }
-
-        /* =========================
-           PANEL
-        ========================= */
 
         #brm-panel{
-            display:none;
-
-            margin-top:20px;
-
-            background:#fff;
-
-            border-radius:26px;
-
-            padding:36px;
-
-            border:1px solid #d8e8f3;
-
-            box-shadow:
-            0 8px 24px rgba(0,0,0,.05);
-
-            animation:brmFade .25s ease;
+            padding:24px 18px;
         }
-
-        #brm-panel.open{
-            display:block;
-        }
-
-        @keyframes brmFade{
-            from{
-                opacity:0;
-                transform:translateY(-8px);
-            }
-
-            to{
-                opacity:1;
-                transform:translateY(0);
-            }
-        }
-
-        /* HEADER */
-
-        #brm-head{
-            display:flex;
-
-            align-items:flex-start;
-
-            justify-content:space-between;
-
-            gap:20px;
-
-            margin-bottom:24px;
-        }
-
-        #brm-head h3{
-            margin:0;
-
-            color:#0f5d94;
-
-            font-size:30px;
-
-            font-weight:900;
-        }
-
-        #brm-head p{
-            margin-top:8px;
-
-            color:#658093;
-
-            font-size:14px;
-
-            line-height:1.7;
-        }
-
-        /* CLOSE */
-
-        #brm-close{
-            width:40px;
-            height:40px;
-
-            border:none;
-
-            border-radius:50%;
-
-            background:#eef5fa;
-
-            color:#4c6b82;
-
-            font-size:18px;
-
-            cursor:pointer;
-
-            transition:.2s;
-        }
-
-        #brm-close:hover{
-            background:#d9edf9;
-        }
-
-        /* Divider */
-
-        #brm-divider{
-            height:1px;
-
-            background:#edf3f7;
-
-            margin:0 0 28px;
-        }
-
-        /* GRID */
 
         #brm-row{
-            display:grid;
-
-            grid-template-columns:1fr 1fr;
-
-            gap:18px;
+            grid-template-columns:1fr;
         }
+    }
 
-        /* FIELDS */
+`;
 
-        .brm-f{
-            margin-bottom:18px;
-        }
+// ─────────────────────────────
+// HTML
+// ─────────────────────────────
+var markup = `
+    <style>${css}</style>
 
-        .brm-f label{
-            display:block;
+    <div id="brm-section">
 
-            margin-bottom:8px;
+        <div id="brm-inner">
 
-            color:#145f95;
+            <div id="brm-banner" role="button" tabindex="0">
 
-            font-weight:700;
+                <div id="brm-text">
 
-            font-size:14px;
-        }
+                    <h1>${t.h1}</h1>
 
-        .brm-f input,
-        .brm-f select{
-            width:100%;
-
-            padding:15px 16px;
-
-            border-radius:14px;
-
-            border:1px solid #cfe2ef;
-
-            background:#f8fbfd;
-
-            color:#174d73;
-
-            font-size:15px;
-
-            outline:none;
-
-            transition:.2s;
-        }
-
-        .brm-f input::placeholder{
-            color:#87a4b8;
-        }
-
-        .brm-f input:focus,
-        .brm-f select:focus{
-            border-color:#2d9cdb;
-
-            background:#fff;
-
-            box-shadow:
-            0 0 0 4px rgba(45,156,219,.12);
-        }
-
-        .brm-f select option{
-            background:#fff;
-            color:#174d73;
-        }
-
-        /* SUBMIT */
-
-        #brm-submit{
-            width:100%;
-
-            border:none;
-
-            border-radius:16px;
-
-            padding:16px;
-
-            background:
-            linear-gradient(
-                135deg,
-                #0f6da8,
-                #2d9cdb
-            );
-
-            color:#fff;
-
-            font-size:17px;
-
-            font-weight:800;
-
-            cursor:pointer;
-
-            transition:.2s;
-        }
-
-        #brm-submit:hover{
-            transform:translateY(-1px);
-
-            opacity:.96;
-        }
-
-        /* NOTE */
-
-        #brm-note{
-            margin-top:14px;
-
-            text-align:center;
-
-            color:#7890a2;
-
-            font-size:12px;
-
-            line-height:1.7;
-        }
-
-        /* SUCCESS */
-
-        #brm-success{
-            display:none;
-
-            text-align:center;
-
-            padding:40px 20px;
-        }
-
-        #brm-check{
-            width:72px;
-            height:72px;
-
-            margin:auto auto 18px;
-
-            border-radius:50%;
-
-            background:#eaf6ff;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:center;
-
-            font-size:32px;
-        }
-
-        #brm-success h4{
-            color:#0f6da8;
-
-            font-size:28px;
-
-            margin:0 0 8px;
-        }
-
-        #brm-success p{
-            color:#6a8293;
-
-            margin:0;
-        }
-
-        /* MOBILE */
-
-        @media(max-width:768px){
-
-            #brm-section{
-                padding:14px 0;
-            }
-
-            #brm-inner{
-                padding:0 14px;
-            }
-
-            #brm-banner{
-                padding:40px 24px;
-                min-height:auto;
-            }
-
-            #brm-text h1{
-                font-size:34px;
-            }
-
-            #brm-panel{
-                padding:24px 18px;
-            }
-
-            #brm-row{
-                grid-template-columns:1fr;
-            }
-        }
-
-    `;
-
-    // ─────────────────────────────
-    // HTML
-    // ─────────────────────────────
-    var markup = `
-        <style>${css}</style>
-
-        <div id="brm-section">
-
-            <div id="brm-inner">
-
-                <div id="brm-banner" role="button" tabindex="0">
-
-                    <div id="brm-text">
-
-                        <h1>${t.h1}</h1>
-
-                        <button id="brm-cta">
-                            ${t.cta}
-                        </button>
-
-                    </div>
+                    <button id="brm-cta">
+                        ${t.cta}
+                    </button>
 
                 </div>
 
-                <div id="brm-panel">
+            </div>
 
-                    <div id="brm-head">
+            <div id="brm-panel">
 
-                        <div>
-                            <h3>${t.formTitle}</h3>
-                            <p>${t.formSub}</p>
-                        </div>
+                <div id="brm-head">
 
-                        <button id="brm-close">✕</button>
-
+                    <div>
+                        <h3>${t.formTitle}</h3>
+                        <p>${t.formSub}</p>
                     </div>
 
-                    <div id="brm-divider"></div>
+                    <button id="brm-close">✕</button>
 
-                    <div id="brm-form-content">
+                </div>
 
-                        <div id="brm-row">
+                <div id="brm-divider"></div>
 
-                            <div class="brm-f">
-                                <label for="brm-name">
-                                    ${t.lblName}
-                                </label>
+                <div id="brm-form-content">
 
-                                <input
-                                    type="text"
-                                    id="brm-name"
-                                    placeholder="${t.phName}"
-                                />
-                            </div>
+                    <div id="brm-row">
 
-                            <div class="brm-f">
-                                <label for="brm-phone">
-                                    ${t.lblPhone}
-                                </label>
+                        <div class="brm-f">
+                            <label for="brm-name">
+                                ${t.lblName}
+                            </label>
 
-                                <input
-                                    type="tel"
-                                    id="brm-phone"
-                                    placeholder="${t.phPhone}"
-                                />
-                            </div>
-
+                            <input
+                                type="text"
+                                id="brm-name"
+                                placeholder="${t.phName}"
+                            />
                         </div>
 
                         <div class="brm-f">
-
-                            <label for="brm-biz">
-                                ${t.lblBiz}
+                            <label for="brm-phone">
+                                ${t.lblPhone}
                             </label>
 
-                            <select id="brm-biz">
-
-                                <option value="">
-                                    ${t.optDefault}
-                                </option>
-
-                                <option value="restaurant">
-                                    ${t.optR}
-                                </option>
-
-                                <option value="cafe">
-                                    ${t.optC}
-                                </option>
-
-                                <option value="store">
-                                    ${t.optS}
-                                </option>
-
-                                <option value="other">
-                                    ${t.optO}
-                                </option>
-
-                            </select>
-
+                            <input
+                                type="tel"
+                                id="brm-phone"
+                                placeholder="${t.phPhone}"
+                            />
                         </div>
-
-                        <button id="brm-submit">
-                            ${t.submit}
-                        </button>
-
-                        <p id="brm-note">
-                            ${t.note}
-                        </p>
 
                     </div>
 
-                    <div id="brm-success">
+                    <div class="brm-f">
 
-                        <div id="brm-check">
-                            ✅
-                        </div>
+                        <label for="brm-biz">
+                            ${t.lblBiz}
+                        </label>
 
-                        <h4>${t.successTitle}</h4>
+                        <select id="brm-biz">
 
-                        <p>${t.successSub}</p>
+                            <option value="">
+                                ${t.optDefault}
+                            </option>
+
+                            <option value="restaurant">
+                                ${t.optR}
+                            </option>
+
+                            <option value="cafe">
+                                ${t.optC}
+                            </option>
+
+                            <option value="store">
+                                ${t.optS}
+                            </option>
+
+                            <option value="other">
+                                ${t.optO}
+                            </option>
+
+                        </select>
 
                     </div>
+
+                    <button id="brm-submit">
+                        ${t.submit}
+                    </button>
+
+                    <p id="brm-note">
+                        ${t.note}
+                    </p>
+
+                </div>
+
+                <div id="brm-success">
+
+                    <div id="brm-check">
+                        ✅
+                    </div>
+
+                    <h4>${t.successTitle}</h4>
+
+                    <p>${t.successSub}</p>
 
                 </div>
 
             </div>
 
         </div>
-    `;
+
+    </div>
+`;
 
 // Inject
 // ─────────────────────────────
