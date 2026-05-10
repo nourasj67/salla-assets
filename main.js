@@ -152,7 +152,7 @@
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbzNMF-CMBWDintkJ_WLbvAf5ef-sjbvdFEI4lT64rnumMNNKEfacjp88SUW2vwaVQIE1w/exec';
+        'https://script.google.com/macros/s/AKfycby-FqsGlXMAilC0ZwHqnlJIVGwNW-6a0lXGWkwXzQ_hv7rLwCM6FCSXe7L5fa29uKpcqA/exec';
     
 
     // ─────────────────────────────
@@ -849,8 +849,6 @@
         fetch(SCRIPT_URL, {
 
             method:'POST',
-
-            mode:'no-cors',
 
             headers:{
                 'Content-Type':'application/json'
