@@ -850,6 +850,7 @@ async function send(e) {
         await fetch(SCRIPT_URL, {
 
             method:'POST',
+            mode: 'no-cors',
 
             body:new URLSearchParams({
 
