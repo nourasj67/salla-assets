@@ -51,6 +51,7 @@
     }
 })();
 
+```javascript
 // بداية فورم
 (function () {
     'use strict';
@@ -79,10 +80,10 @@
             phPhone:      '05xxxxxxxx',
             lblBiz:       'نوع النشاط التجاري',
             optDefault:   '— اختر نوع نشاطك التجاري —',
-            optR:         '️ مطعم',
+            optR:         '🍽️ مطعم',
             optC:         '☕ مقهى',
-            optS:         ' متجر',
-            optO:         ' أخرى',
+            optS:         '🛒 متجر',
+            optO:         '🏢 أخرى',
             submit:       'إرسال الطلب',
             note:         'بياناتك محفوظة بالكامل ولن تُستخدم إلا للتواصل معك بشأن طلبك',
             alert:        'يرجى تعبئة جميع الحقول',
@@ -102,10 +103,10 @@
             phPhone:      '+966 5x xxx xxxx',
             lblBiz:       'Business Type',
             optDefault:   '— Select your business type —',
-            optR:         '️ Restaurant',
+            optR:         '🍽️ Restaurant',
             optC:         '☕ Café',
-            optS:         ' Store',
-            optO:         ' Other',
+            optS:         '🛒 Store',
+            optO:         '🏢 Other',
             submit:       'Submit Request',
             note:         'Your data is fully protected and used only to follow up on your request',
             alert:        'Please fill in all fields',
@@ -115,252 +116,382 @@
     };
 
     var t = T[lang];
+
     var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNMF-CMBWDintkJ_WLbvAf5ef-sjbvdFEI4lT64rnumMNNKEfacjp88SUW2vwaVQIE1w/exec';
 
     // ─── CSS ───────────────────────────────────────────────────────
     var css = `
-        #brm-section {
-            width: 100%;
-            padding: 0 0 8px 0;
+        body{
+            overflow-x:hidden;
         }
 
-        /* مطابق لعرض container ثيم رائد */
-        #brm-inner {
-            max-width: 870px;
-            margin: 0 auto;
-            padding: 0 15px;
-            direction: ${isArabic ? 'rtl' : 'ltr'};
-            font-family: ${isArabic ? "'Tajawal', 'Cairo', sans-serif" : "'Plus Jakarta Sans', sans-serif"};
+        #brm-section{
+            width:100vw;
+            max-width:100vw;
+            margin-right:calc(50% - 50vw);
+            margin-left:calc(50% - 50vw);
+            padding:8px 0;
+        }
+
+        #brm-inner{
+            width:100%;
+            max-width:100%;
+            margin:0;
+            padding:15px 30px;
+            direction:${isArabic ? 'rtl' : 'ltr'};
+            font-family:${isArabic ? "'Tajawal', 'Cairo', sans-serif" : "'Plus Jakarta Sans', sans-serif"};
+            box-sizing:border-box;
+        }
+
+        *{
+            box-sizing:border-box;
         }
 
         /* Banner */
-        #brm-banner {
-            position: relative;
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(110deg, #0c1b2b 0%, #122336 40%, #0d2540 100%);
-            padding: 28px 36px;
-            min-height: 160px;
-            transition: box-shadow 0.2s ease;
-            gap: 20px;
-        }
-        #brm-banner:hover {
-            box-shadow: 0 8px 32px rgba(0,100,180,0.2);
-        }
-        #brm-banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 55% 80% at ${isArabic ? '75%' : '25%'} 50%, rgba(56,160,230,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        #brm-banner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 24px 24px;
-            pointer-events: none;
+        #brm-banner{
+            position:relative;
+            width:100%;
+            border-radius:16px;
+            overflow:hidden;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            background:linear-gradient(110deg, #0c1b2b 0%, #122336 40%, #0d2540 100%);
+            padding:28px 36px;
+            min-height:160px;
+            transition:box-shadow 0.2s ease;
+            gap:20px;
         }
 
-        #brm-text {
-            position: relative;
-            z-index: 1;
-            ${isArabic ? 'text-align: right;' : 'text-align: left;'}
-        }
-        #brm-text h1 {
-            font-size: 32px;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.2;
-            margin: 0 0 2px 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-        }
-        #brm-text h2 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #5bc8f7;
-            margin: 0 0 18px 0;
-            text-shadow: 0 2px 10px rgba(0,80,160,0.3);
-        }
-        #brm-cta {
-            display: inline-block;
-            background: rgba(150,190,220,0.2);
-            border: 1.5px solid rgba(150,195,228,0.5);
-            color: #cce8f6;
-            font-family: inherit;
-            font-size: 15px;
-            font-weight: 700;
-            padding: 11px 26px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
-        }
-        #brm-cta:hover {
-            background: rgba(91,200,247,0.28);
-            border-color: #5bc8f7;
-            color: #fff;
+        #brm-banner:hover{
+            box-shadow:0 8px 32px rgba(0,100,180,0.2);
         }
 
-        #brm-logo-side {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
+        #brm-banner::before{
+            content:'';
+            position:absolute;
+            inset:0;
+            background:radial-gradient(
+                ellipse 55% 80% at ${isArabic ? '75%' : '25%'} 50%,
+                rgba(56,160,230,0.1) 0%,
+                transparent 70%
+            );
+            pointer-events:none;
         }
-        #brm-logo-side img {
-            width: 160px;
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 3px 12px rgba(0,0,0,0.4));
+
+        #brm-banner::after{
+            content:'';
+            position:absolute;
+            inset:0;
+            background-image:radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size:24px 24px;
+            pointer-events:none;
         }
-        #brm-tagline {
-            font-size: 10.5px;
-            color: #6fb0ca;
-            text-align: center;
-            max-width: 170px;
-            line-height: 1.5;
+
+        #brm-text{
+            position:relative;
+            z-index:1;
+            ${isArabic ? 'text-align:right;' : 'text-align:left;'}
+        }
+
+        #brm-text h1{
+            font-size:32px;
+            font-weight:800;
+            color:#fff;
+            line-height:1.2;
+            margin:0 0 2px 0;
+            text-shadow:0 2px 10px rgba(0,0,0,0.4);
+        }
+
+        #brm-text h2{
+            font-size:26px;
+            font-weight:700;
+            color:#5bc8f7;
+            margin:0 0 18px 0;
+            text-shadow:0 2px 10px rgba(0,80,160,0.3);
+        }
+
+        #brm-cta{
+            display:inline-block;
+            background:rgba(150,190,220,0.2);
+            border:1.5px solid rgba(150,195,228,0.5);
+            color:#cce8f6;
+            font-family:inherit;
+            font-size:15px;
+            font-weight:700;
+            padding:11px 26px;
+            border-radius:50px;
+            cursor:pointer;
+            transition:background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        #brm-cta:hover{
+            background:rgba(91,200,247,0.28);
+            border-color:#5bc8f7;
+            color:#fff;
+        }
+
+        #brm-logo-side{
+            position:relative;
+            z-index:1;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:8px;
+            flex-shrink:0;
+        }
+
+        #brm-logo-side img{
+            width:160px;
+            height:auto;
+            display:block;
+            filter:drop-shadow(0 3px 12px rgba(0,0,0,0.4));
+        }
+
+        #brm-tagline{
+            font-size:10.5px;
+            color:#6fb0ca;
+            text-align:center;
+            max-width:170px;
+            line-height:1.5;
         }
 
         /* Form panel */
-        #brm-panel {
-            display: none;
-            margin-top: 8px;
-            background: linear-gradient(150deg, #0c1b2b 0%, #0f2238 100%);
-            border-radius: 16px;
-            border: 1px solid rgba(91,200,247,0.13);
-            padding: 32px 36px;
-            animation: brmIn 0.28s ease;
-            direction: ${isArabic ? 'rtl' : 'ltr'};
-        }
-        #brm-panel.open { display: block; }
-
-        @keyframes brmIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to   { opacity: 1; transform: translateY(0); }
+        #brm-panel{
+            display:none;
+            margin-top:8px;
+            background:linear-gradient(150deg, #0c1b2b 0%, #0f2238 100%);
+            border-radius:16px;
+            border:1px solid rgba(91,200,247,0.13);
+            padding:32px 36px;
+            animation:brmIn 0.28s ease;
+            direction:${isArabic ? 'rtl' : 'ltr'};
         }
 
-        #brm-head {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 24px;
-        }
-        #brm-head h3 { font-size: 20px; font-weight: 800; color: #fff; margin: 0; }
-        #brm-head p  { font-size: 12.5px; color: #6fa8c0; margin: 4px 0 0 0; }
-
-        #brm-close {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #6fa8c0;
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-            transition: background 0.2s, color 0.2s;
-            line-height: 1;
-        }
-        #brm-close:hover { background: rgba(91,200,247,0.15); color: #fff; }
-
-        #brm-divider { height: 1px; background: rgba(91,200,247,0.1); margin: 0 0 24px; }
-
-        #brm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .brm-f  { margin-bottom: 16px; }
-        .brm-f label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #8fbfd6;
-            margin-bottom: 7px;
-        }
-        .brm-f input, .brm-f select {
-            width: 100%;
-            padding: 11px 14px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(91,200,247,0.16);
-            border-radius: 9px;
-            color: #fff;
-            font-size: 14px;
-            font-family: inherit;
-            outline: none;
-            direction: ${isArabic ? 'rtl' : 'ltr'};
-            transition: border-color 0.2s, background 0.2s;
-        }
-        .brm-f input::placeholder { color: #3d6a88; }
-        .brm-f input:focus, .brm-f select:focus {
-            border-color: #5bc8f7;
-            background: rgba(91,200,247,0.06);
-        }
-        .brm-f select option { background: #0f2238; color: #fff; }
-
-        #brm-submit {
-            width: 100%;
-            padding: 13px;
-            margin-top: 4px;
-            background: linear-gradient(135deg, #1460a8, #5bc8f7);
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            font-family: inherit;
-            cursor: pointer;
-            transition: opacity 0.2s, transform 0.1s;
-        }
-        #brm-submit:hover  { opacity: 0.9; }
-        #brm-submit:active { transform: scale(0.99); }
-
-        #brm-note {
-            font-size: 11px;
-            color: #3a6480;
-            text-align: center;
-            margin-top: 12px;
-            line-height: 1.6;
+        #brm-panel.open{
+            display:block;
         }
 
-        #brm-success {
-            display: none;
-            text-align: center;
-            padding: 32px 16px;
-            background: rgba(91,200,247,0.06);
-            border-radius: 12px;
-            border: 1px solid rgba(91,200,247,0.18);
+        @keyframes brmIn{
+            from{
+                opacity:0;
+                transform:translateY(-8px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
         }
-        #brm-check {
-            width: 58px; height: 58px;
-            background: rgba(91,200,247,0.13);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 14px;
-            font-size: 26px;
-        }
-        #brm-success h4 { color: #5bc8f7; font-size: 20px; font-weight: 700; margin: 0 0 6px; }
-        #brm-success p  { color: #6fa8c0; font-size: 13px; margin: 0; }
 
-        @media (max-width: 600px) {
-            #brm-banner { flex-direction: column; padding: 22px 20px; text-align: center; min-height: auto; }
-            #brm-text   { text-align: center !important; }
-            #brm-text h1 { font-size: 24px; }
-            #brm-text h2 { font-size: 20px; }
-            #brm-logo-side img { width: 130px; }
-            #brm-row    { grid-template-columns: 1fr; }
-            #brm-panel  { padding: 24px 18px; }
+        #brm-head{
+            display:flex;
+            align-items:flex-start;
+            justify-content:space-between;
+            margin-bottom:24px;
+        }
+
+        #brm-head h3{
+            font-size:20px;
+            font-weight:800;
+            color:#fff;
+            margin:0;
+        }
+
+        #brm-head p{
+            font-size:12.5px;
+            color:#6fa8c0;
+            margin:4px 0 0 0;
+        }
+
+        #brm-close{
+            background:rgba(255,255,255,0.07);
+            border:1px solid rgba(255,255,255,0.1);
+            color:#6fa8c0;
+            width:34px;
+            height:34px;
+            border-radius:50%;
+            font-size:16px;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+            transition:background 0.2s, color 0.2s;
+            line-height:1;
+        }
+
+        #brm-close:hover{
+            background:rgba(91,200,247,0.15);
+            color:#fff;
+        }
+
+        #brm-divider{
+            height:1px;
+            background:rgba(91,200,247,0.1);
+            margin:0 0 24px;
+        }
+
+        #brm-row{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:16px;
+        }
+
+        .brm-f{
+            margin-bottom:16px;
+        }
+
+        .brm-f label{
+            display:block;
+            font-size:13px;
+            font-weight:600;
+            color:#8fbfd6;
+            margin-bottom:7px;
+        }
+
+        .brm-f input,
+        .brm-f select{
+            width:100%;
+            padding:11px 14px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(91,200,247,0.16);
+            border-radius:9px;
+            color:#fff;
+            font-size:14px;
+            font-family:inherit;
+            outline:none;
+            direction:${isArabic ? 'rtl' : 'ltr'};
+            transition:border-color 0.2s, background 0.2s;
+        }
+
+        .brm-f input::placeholder{
+            color:#3d6a88;
+        }
+
+        .brm-f input:focus,
+        .brm-f select:focus{
+            border-color:#5bc8f7;
+            background:rgba(91,200,247,0.06);
+        }
+
+        .brm-f select option{
+            background:#0f2238;
+            color:#fff;
+        }
+
+        #brm-submit{
+            width:100%;
+            padding:13px;
+            margin-top:4px;
+            background:linear-gradient(135deg, #1460a8, #5bc8f7);
+            border:none;
+            border-radius:10px;
+            color:#fff;
+            font-size:16px;
+            font-weight:700;
+            font-family:inherit;
+            cursor:pointer;
+            transition:opacity 0.2s, transform 0.1s;
+        }
+
+        #brm-submit:hover{
+            opacity:0.9;
+        }
+
+        #brm-submit:active{
+            transform:scale(0.99);
+        }
+
+        #brm-note{
+            font-size:11px;
+            color:#3a6480;
+            text-align:center;
+            margin-top:12px;
+            line-height:1.6;
+        }
+
+        #brm-success{
+            display:none;
+            text-align:center;
+            padding:32px 16px;
+            background:rgba(91,200,247,0.06);
+            border-radius:12px;
+            border:1px solid rgba(91,200,247,0.18);
+        }
+
+        #brm-check{
+            width:58px;
+            height:58px;
+            background:rgba(91,200,247,0.13);
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin:0 auto 14px;
+            font-size:26px;
+        }
+
+        #brm-success h4{
+            color:#5bc8f7;
+            font-size:20px;
+            font-weight:700;
+            margin:0 0 6px;
+        }
+
+        #brm-success p{
+            color:#6fa8c0;
+            font-size:13px;
+            margin:0;
+        }
+
+        @media (max-width: 600px){
+
+            #brm-section{
+                padding:0;
+            }
+
+            #brm-inner{
+                padding:12px;
+            }
+
+            #brm-banner{
+                flex-direction:column;
+                padding:22px 20px;
+                text-align:center;
+                min-height:auto;
+            }
+
+            #brm-text{
+                text-align:center !important;
+            }
+
+            #brm-text h1{
+                font-size:24px;
+            }
+
+            #brm-text h2{
+                font-size:20px;
+            }
+
+            #brm-logo-side img{
+                width:130px;
+            }
+
+            #brm-row{
+                grid-template-columns:1fr;
+            }
+
+            #brm-panel{
+                padding:24px 18px;
+            }
         }
     `;
 
     // ─── HTML ──────────────────────────────────────────────────────
     var markup = `
         <style>${css}</style>
+
         <div id="brm-section">
             <div id="brm-inner">
 
@@ -370,35 +501,44 @@
                         <h2>${t.h2}</h2>
                         <button id="brm-cta">${t.cta}</button>
                     </div>
+
                     <div id="brm-logo-side">
                         <img src="https://i.postimg.cc/q7WfYxNf/logo-m.png" alt="Barmajah" />
-                        <div id="brm-tagline">${t.tagline}</div>
                     </div>
                 </div>
 
                 <div id="brm-panel">
+
                     <div id="brm-head">
                         <div>
                             <h3>${t.formTitle}</h3>
                             <p>${t.formSub}</p>
                         </div>
-                        <button id="brm-close" aria-label="close"></button>
+
+                        <button id="brm-close" aria-label="close">✕</button>
                     </div>
+
                     <div id="brm-divider"></div>
 
                     <div id="brm-form-content">
+
                         <div id="brm-row">
+
                             <div class="brm-f">
                                 <label for="brm-name">${t.lblName}</label>
                                 <input type="text" id="brm-name" placeholder="${t.phName}" />
                             </div>
+
                             <div class="brm-f">
                                 <label for="brm-phone">${t.lblPhone}</label>
                                 <input type="tel" id="brm-phone" placeholder="${t.phPhone}" />
                             </div>
+
                         </div>
+
                         <div class="brm-f">
                             <label for="brm-biz">${t.lblBiz}</label>
+
                             <select id="brm-biz">
                                 <option value="">${t.optDefault}</option>
                                 <option value="restaurant">${t.optR}</option>
@@ -407,15 +547,18 @@
                                 <option value="other">${t.optO}</option>
                             </select>
                         </div>
+
                         <button id="brm-submit">${t.submit}</button>
+
                         <p id="brm-note">${t.note}</p>
                     </div>
 
                     <div id="brm-success">
-                        <div id="brm-check"></div>
+                        <div id="brm-check">✅</div>
                         <h4>${t.successTitle}</h4>
                         <p>${t.successSub}</p>
                     </div>
+
                 </div>
 
             </div>
@@ -424,39 +567,64 @@
 
     // ─── حقن في الصفحة ────────────────────────────────────────────
     function inject() {
+
         var target = document.querySelector('.s-block.s-block--fixed-banner.wide-placeholder');
+
         if (target) {
             target.insertAdjacentHTML('beforebegin', markup);
         } else {
             var main = document.querySelector('main') || document.querySelector('.s-layout-body') || document.body;
             main.insertAdjacentHTML('afterbegin', markup);
         }
+
         bindEvents();
     }
 
     // ─── أحداث ────────────────────────────────────────────────────
     function bindEvents() {
+
         var banner = document.getElementById('brm-banner');
         var cta    = document.getElementById('brm-cta');
         var close  = document.getElementById('brm-close');
         var submit = document.getElementById('brm-submit');
 
         if (banner) banner.addEventListener('click', toggle);
-        if (cta)    cta.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
-        if (close)  close.addEventListener('click', toggle);
+
+        if (cta) {
+            cta.addEventListener('click', function (e) {
+                e.stopPropagation();
+                toggle();
+            });
+        }
+
+        if (close) close.addEventListener('click', toggle);
+
         if (submit) submit.addEventListener('click', send);
     }
 
     function toggle() {
+
         var panel = document.getElementById('brm-panel');
+
         if (!panel) return;
+
         panel.classList.toggle('open');
+
         if (panel.classList.contains('open')) {
-            setTimeout(function () { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 40);
+
+            setTimeout(function () {
+
+                panel.scrollIntoView({
+                    behavior:'smooth',
+                    block:'nearest'
+                });
+
+            }, 40);
         }
     }
 
     function send() {
+
         var name  = (document.getElementById('brm-name')  || {}).value || '';
         var phone = (document.getElementById('brm-phone') || {}).value || '';
         var biz   = (document.getElementById('brm-biz')   || {}).value || '';
@@ -464,23 +632,30 @@
         name  = name.trim();
         phone = phone.trim();
 
-        if (!name || !phone || !biz) { alert(t.alert); return; }
+        if (!name || !phone || !biz) {
+            alert(t.alert);
+            return;
+        }
 
         document.getElementById('brm-form-content').style.display = 'none';
         document.getElementById('brm-success').style.display      = 'block';
 
         fetch(SCRIPT_URL, {
-            method:  'POST',
-            mode:    'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name:      name,
-                phone:     phone,
-                business:  biz,
-                lang:      lang,
-                timestamp: new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US')
+            method:'POST',
+            mode:'no-cors',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                name:name,
+                phone:phone,
+                business:biz,
+                lang:lang,
+                timestamp:new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US')
             })
-        }).catch(function (e) { console.warn('brm send error:', e); });
+        }).catch(function (e) {
+            console.warn('brm send error:', e);
+        });
     }
 
     // ─── تشغيل ────────────────────────────────────────────────────
@@ -492,6 +667,7 @@
 
 })();
 // نهاية الفورم
+```
 
 // Fixed Pricing Plans Section for Salla - Al Mo'taman Lite (Perfect Alignment)
 (function() {
