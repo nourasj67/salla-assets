@@ -739,114 +739,115 @@
         </div>
     `;
 
-    // ─────────────────────────────
-    // Inject
-    // ─────────────────────────────
-    function inject() {
+// Inject
+// ─────────────────────────────
+function inject() {
 
-        var target =
-            document.querySelector('.s-block.s-block--fixed-banner.wide-placeholder');
+    var target =
+        document.querySelector('.s-block.s-block--fixed-banner.wide-placeholder');
 
-        if (target) {
-            target.insertAdjacentHTML('beforebegin', markup);
-        } else {
+    if (target) {
+        target.insertAdjacentHTML('beforebegin', markup);
+    } else {
 
-            var main =
-                document.querySelector('main') ||
-                document.querySelector('.s-layout-body') ||
-                document.body;
+        var main =
+            document.querySelector('main') ||
+            document.querySelector('.s-layout-body') ||
+            document.body;
 
-            main.insertAdjacentHTML('afterbegin', markup);
-        }
-
-        bindEvents();
+        main.insertAdjacentHTML('afterbegin', markup);
     }
 
-    // ─────────────────────────────
-    // Events
-    // ─────────────────────────────
-    function bindEvents() {
+    bindEvents();
+}
 
-        var banner = document.getElementById('brm-banner');
-        var cta    = document.getElementById('brm-cta');
-        var close  = document.getElementById('brm-close');
-        var submit = document.getElementById('brm-submit');
+// ─────────────────────────────
+// Events
+// ─────────────────────────────
+function bindEvents() {
 
-        if (banner)
-            banner.addEventListener('click', toggle);
+    var banner = document.getElementById('brm-banner');
+    var cta    = document.getElementById('brm-cta');
+    var close  = document.getElementById('brm-close');
+    var submit = document.getElementById('brm-submit');
 
-        if (cta) {
+    if (banner)
+        banner.addEventListener('click', toggle);
 
-            cta.addEventListener('click', function (e) {
+    if (cta) {
 
-                e.stopPropagation();
+        cta.addEventListener('click', function (e) {
 
-                toggle();
+            e.stopPropagation();
 
+            toggle();
+
+        });
+    }
+
+    if (close)
+        close.addEventListener('click', toggle);
+
+    if (submit)
+        submit.addEventListener('click', send);
+}
+
+// ─────────────────────────────
+// Toggle
+// ─────────────────────────────
+function toggle() {
+
+    var panel =
+        document.getElementById('brm-panel');
+
+    if (!panel) return;
+
+    panel.classList.toggle('open');
+
+    if (panel.classList.contains('open')) {
+
+        setTimeout(function () {
+
+            panel.scrollIntoView({
+                behavior:'smooth',
+                block:'nearest'
             });
-        }
 
-        if (close)
-            close.addEventListener('click', toggle);
+        }, 40);
+    }
+}
 
-        if (submit)
-            submit.addEventListener('click', send);
+// ─────────────────────────────
+// Send
+// ─────────────────────────────
+async function send(e) {
+
+    if (e)
+        e.preventDefault();
+
+    var name =
+        (document.getElementById('brm-name') || {}).value || '';
+
+    var phone =
+        (document.getElementById('brm-phone') || {}).value || '';
+
+    var biz =
+        (document.getElementById('brm-biz') || {}).value || '';
+
+    name  = name.trim();
+    phone = phone.trim();
+    biz   = biz.trim();
+
+    if (!name || !phone || !biz) {
+
+        alert(t.alert);
+
+        return;
     }
 
-    // ─────────────────────────────
-    // Toggle
-    // ─────────────────────────────
-    function toggle() {
+    try {
 
-        var panel =
-            document.getElementById('brm-panel');
-
-        if (!panel) return;
-
-        panel.classList.toggle('open');
-
-        if (panel.classList.contains('open')) {
-
-            setTimeout(function () {
-
-                panel.scrollIntoView({
-                    behavior:'smooth',
-                    block:'nearest'
-                });
-
-            }, 40);
-        }
-    }
-
-    // ─────────────────────────────
-    // Send
-    // ─────────────────────────────
-    function send() {
-
-        var name =
-            (document.getElementById('brm-name') || {}).value || '';
-
-        var phone =
-            (document.getElementById('brm-phone') || {}).value || '';
-
-        var biz =
-            (document.getElementById('brm-biz') || {}).value || '';
-
-        name  = name.trim();
-        phone = phone.trim();
-
-        if (!name || !phone || !biz) {
-
-            alert(t.alert);
-
-            return;
-        }
-
-        document.getElementById('brm-form-content').style.display = 'none';
-
-        document.getElementById('brm-success').style.display = 'block';
-
-        fetch(SCRIPT_URL, {
+        await fetch(SCRIPT_URL, {
 
             method:'POST',
 
@@ -867,27 +868,34 @@
                     )
             })
 
-        }).catch(function (e) {
-
-            console.warn('brm send error:', e);
-
         });
+
+        document.getElementById('brm-form-content').style.display = 'none';
+
+        document.getElementById('brm-success').style.display = 'block';
+
+    } catch (e) {
+
+        console.warn('brm send error:', e);
+
+        alert('Send failed');
     }
+}
 
-    // ─────────────────────────────
-    // Start
-    // ─────────────────────────────
-    if (document.readyState === 'loading') {
+// ─────────────────────────────
+// Start
+// ─────────────────────────────
+if (document.readyState === 'loading') {
 
-        document.addEventListener(
-            'DOMContentLoaded',
-            inject
-        );
+    document.addEventListener(
+        'DOMContentLoaded',
+        inject
+    );
 
-    } else {
+} else {
 
-        inject();
-    }
+    inject();
+}
 
 })();
 // نهاية الفورم
