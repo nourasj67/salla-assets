@@ -219,7 +219,7 @@ var css = `
 
         text-align:center;
 
-        padding:58px 40px;
+        padding:46px 40px;
 
         background:
         linear-gradient(
@@ -229,7 +229,7 @@ var css = `
             #1C88D9 100%
         );
 
-        min-height:260px;
+        min-height:200px;
 
         box-shadow:
         0 12px 30px rgba(0,0,0,.08);
@@ -665,7 +665,7 @@ var css = `
         }
 
         #brm-banner{
-            padding:40px 24px;
+            padding:32px 24px;
 
             min-height:auto;
         }
