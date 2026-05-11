@@ -1,4 +1,9 @@
 // Preloader
+
+var script = document.createElement('script');
+script.src = 'https://www.google.com/recaptcha/api.js';
+document.head.appendChild(script);
+
 (function() {
     'use strict';
  
@@ -152,7 +157,7 @@
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbxuIDWDPWBLEMpt6iEmK-3oHJHebU_hhTsFMsDtfZr5SNEsdysmSS7PdgioK288hRU0/exec';
+        'https://script.google.com/macros/s/AKfycbxXFES-JXLjE9zo-3n9RFIv0SwyeWGPXl0srnTbhyolTy8TWd8NvqeSr-hcKc0zr9_f/exec';
     
 
 // ─────────────────────────────
@@ -793,6 +798,8 @@ var markup = `
 
                     </div>
 
+                    <div class="g-recaptcha" data-sitekey="6LdjpeQsAAAAAPZLFA1e7I440pnZLo6CK4Q9zOnw"></div>
+                    
                     <button id="brm-submit">
                         ${t.submit}
                     </button>
@@ -908,6 +915,7 @@ async function send(e) {
     if (e)
         e.preventDefault();
 
+    
     var name =
         (document.getElementById('brm-name') || {}).value || '';
 
@@ -928,6 +936,13 @@ async function send(e) {
         return;
     }
 
+    var captchaToken = grecaptcha.getResponse();
+
+    if (captchaToken.length == 0) {
+        alert("يرجى الضغط على مربع أنا لست روبوت");
+        return;
+    }
+
     try {
 
         await fetch(SCRIPT_URL, {
@@ -941,6 +956,7 @@ async function send(e) {
                 phone:phone,
                 business:biz,
                 lang:lang,
+                'g-recaptcha-response': captchaToken, // إرسال الرد
 
                 timestamp:
                     new Date().toLocaleString(
