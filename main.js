@@ -590,11 +590,7 @@ var css = `
         0 10px 22px rgba(0,0,0,.10);
     }
 
-    .g-recaptcha {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px; /* مسافة بسيطة تحت المربع */
-    }
+   /* .g-recaptcha { display: flex;  justify-content: center; margin-bottom: 15px; } */
 
     /* NOTE */
 
