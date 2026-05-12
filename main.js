@@ -1,9 +1,5 @@
 // Preloader
 
-var script = document.createElement('script');
-script.src = 'https://www.google.com/recaptcha/api.js';
-document.head.appendChild(script);
-
 (function() {
     'use strict';
  
@@ -55,6 +51,11 @@ document.head.appendChild(script);
         setTimeout(hidePreloader, 5000);
     }
 })();
+
+
+var script = document.createElement('script');
+script.src = 'https://www.google.com/recaptcha/api.js';
+document.head.appendChild(script);
 
 // بداية الفورم
 (function () {
@@ -157,8 +158,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbzCoj_xwhnmc7k6qYZrBBrbar9NR_j7sCwys9vKktjMxe-c0kZOC9Z6nPv0I2E0YWac/exec';
-    
+        'https://script.google.com/macros/s/AKfycbwp-WQWyXwSF02HiTa1pBQ7_ugp0m-z_iQjsaCurVvXYheraWktuoSsqdxcNc1wFv9w/exec';
 
 // ─────────────────────────────
 // CSS
@@ -961,35 +961,23 @@ async function send(e) {
 
     try {
 
-        // استخدام FormData لتحسين التوافق مع Apps Script
-        var formData = new FormData();
+       // بدل FormData، استخدم URLSearchParams
+var params = new URLSearchParams();
+params.append('name', name);
+params.append('phone', phone);
+params.append('business', biz);
+params.append('lang', lang);
+params.append('g-recaptcha-response', captchaToken);
+params.append('timestamp', new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US'));
 
-        formData.append('name', name);
-        formData.append('phone', phone);
-        formData.append('business', biz);
-        formData.append('lang', lang);
-
-        formData.append(
-            'g-recaptcha-response',
-            captchaToken
-        );
-
-        formData.append(
-            'timestamp',
-            new Date().toLocaleString(
-                isArabic ? 'ar-SA' : 'en-US'
-            )
-        );
-
-        await fetch(SCRIPT_URL, {
-
-            method:'POST',
-
-          
-
-            body:formData,
-
-        });
+await fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: params.toString()
+});
 
       //  grecaptcha.reset();
 
