@@ -158,7 +158,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbwm3RqSVQ4amcmXEGjQxhvw0kR_jQQcpahwOMnAuw8uYVteNIoNL4qbpnfiBQKGWsxl/exec';
+        'https://script.google.com/macros/s/AKfycbxH-a2iicOg_V7op34yNhpP928vaC0lTZL3sBYDWT3LYYSu20EoNR7nhwYwv2DJmlQ/exec';
 
 // ─────────────────────────────
 // CSS
@@ -956,8 +956,8 @@ async function send(e) {
 
         // أرسل البيانات في الـ URL مباشرة
         await fetch(SCRIPT_URL + '?' + params.toString(), {
-            method: 'POST',
-            mode:   'no-cors',
+        method: 'GET',
+        mode: 'no-cors',
         });
 
         document.getElementById('brm-form-content').style.display = 'none';
