@@ -991,6 +991,8 @@ async function send(e) {
 
         });
 
+        grecaptcha.reset();
+
         document.getElementById('brm-form-content').style.display = 'none';
 
         document.getElementById('brm-success').style.display = 'block';
