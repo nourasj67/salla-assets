@@ -158,7 +158,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbztB29d6HEJBF9uzO5lflzkMvp1SIAbTf-WSsYU29RUEBJCzQZb4c-7GlIHCIgG6Gdm/exec';
+        'https://script.google.com/macros/s/AKfycbzJ0327UV1CVbj2Y83nMnKGtG9o8Et_BJS5-A6LRiRP9GONxAOr9u8_46DWMvu7msA0/exec';
 
 // ─────────────────────────────
 // CSS
@@ -913,44 +913,39 @@ function toggle() {
 // Send
 // ─────────────────────────────
 
-    async function send(e) {
+async function send(e) {
     if (e) e.preventDefault();
-
     var name  = (document.getElementById('brm-name')  || {}).value || '';
     var phone = (document.getElementById('brm-phone') || {}).value || '';
     var biz   = (document.getElementById('brm-biz')   || {}).value || '';
-
     name  = name.trim();
     phone = phone.trim();
     biz   = biz.trim();
-
     if (!name || !phone || !biz) {
         alert(t.alert);
         return;
     }
-
     if (typeof grecaptcha === 'undefined') {
         alert('reCAPTCHA لم يكتمل تحميله بعد');
         return;
     }
-
     var captchaToken = grecaptcha.getResponse();
-
     if (!captchaToken) {
         alert("يرجى الضغط على مربع أنا لست روبوت");
         return;
     }
 
-    var params = new URLSearchParams({
+    var payload = JSON.stringify({
         name:     name,
         phone:    phone,
         business: biz,
         lang:     lang,
-        'g-recaptcha-response': captchaToken,
+        token:    captchaToken,
         timestamp: new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US')
     });
 
-    new Image().src = SCRIPT_URL + '?' + params.toString();
+    var encoded = btoa(unescape(encodeURIComponent(payload)));
+    new Image().src = SCRIPT_URL + '?d=' + encoded;
 
     document.getElementById('brm-form-content').style.display = 'none';
     document.getElementById('brm-success').style.display = 'block';
