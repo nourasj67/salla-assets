@@ -158,7 +158,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbxvorzEpxbl6Jkm8Ja-ImygYOu3699qOwDX9FvNf_w_hnkbobt9SLfObCla2RJeVC6a/exec';
+        'https://script.google.com/macros/s/AKfycbwm3RqSVQ4amcmXEGjQxhvw0kR_jQQcpahwOMnAuw8uYVteNIoNL4qbpnfiBQKGWsxl/exec';
 
 // ─────────────────────────────
 // CSS
@@ -917,82 +917,57 @@ function toggle() {
 // Send
 // ─────────────────────────────
 async function send(e) {
+    if (e) e.preventDefault();
 
-    if (e)
-        e.preventDefault();
-
-    
-    var name =
-        (document.getElementById('brm-name') || {}).value || '';
-
-    var phone =
-        (document.getElementById('brm-phone') || {}).value || '';
-
-    var biz =
-        (document.getElementById('brm-biz') || {}).value || '';
+    var name  = (document.getElementById('brm-name')  || {}).value || '';
+    var phone = (document.getElementById('brm-phone') || {}).value || '';
+    var biz   = (document.getElementById('brm-biz')   || {}).value || '';
 
     name  = name.trim();
     phone = phone.trim();
     biz   = biz.trim();
 
     if (!name || !phone || !biz) {
-
         alert(t.alert);
-
         return;
     }
 
-    // التأكد من تحميل reCAPTCHA
     if (typeof grecaptcha === 'undefined') {
-
         alert('reCAPTCHA لم يكتمل تحميله بعد');
-
         return;
     }
 
     var captchaToken = grecaptcha.getResponse();
 
-    if (captchaToken.length == 0) {
-
+    if (!captchaToken) {
         alert("يرجى الضغط على مربع أنا لست روبوت");
-
         return;
     }
 
     try {
+        var params = new URLSearchParams({
+            name:     name,
+            phone:    phone,
+            business: biz,
+            lang:     lang,
+            'g-recaptcha-response': captchaToken,
+            timestamp: new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US')
+        });
 
-       // بدل FormData، استخدم URLSearchParams
-var params = new URLSearchParams();
-params.append('name', name);
-params.append('phone', phone);
-params.append('business', biz);
-params.append('lang', lang);
-params.append('g-recaptcha-response', captchaToken);
-params.append('timestamp', new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US'));
-
-await fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: params.toString()
-});
-
-      //  grecaptcha.reset();
+        // أرسل البيانات في الـ URL مباشرة
+        await fetch(SCRIPT_URL + '?' + params.toString(), {
+            method: 'POST',
+            mode:   'no-cors',
+        });
 
         document.getElementById('brm-form-content').style.display = 'none';
-
         document.getElementById('brm-success').style.display = 'block';
 
-    } catch (e) {
-
-        console.warn('brm send error:', e);
-
+    } catch(err) {
+        console.warn('brm send error:', err);
         alert('Send failed');
     }
 }
-
 // ─────────────────────────────
 // Start
 // ─────────────────────────────
