@@ -157,7 +157,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbzs6vB4Bet5j3-NU18Wty8eIkwj4PhwnlpZKbbCK8RhWbzPZ44xGfy5kjoMObVYRCPo/exec';
+        'https://script.google.com/macros/s/AKfycbxQ9mHpyWqubUzD_Ch0jUz28_L9gBRNFr_drGIOyNFjLTOHBpEmLMot5vpj2PGUsk2q/exec';
     
 
 // ─────────────────────────────
