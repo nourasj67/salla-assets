@@ -157,7 +157,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbw5dBp7iC31geQrD9-tR_El85Wrxg4oPZurpllXIFUvTPeTQcah0zj3rpk7W-TXC98R/exec';
+        'https://script.google.com/macros/s/AKfycbzs6vB4Bet5j3-NU18Wty8eIkwj4PhwnlpZKbbCK8RhWbzPZ44xGfy5kjoMObVYRCPo/exec';
     
 
 // ─────────────────────────────
@@ -588,6 +588,12 @@ var css = `
 
         box-shadow:
         0 10px 22px rgba(0,0,0,.10);
+    }
+
+    .g-recaptcha {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px; /* مسافة بسيطة تحت المربع */
     }
 
     /* NOTE */
