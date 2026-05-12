@@ -985,13 +985,13 @@ async function send(e) {
 
             method:'POST',
 
-       //     mode:'no-cors',
+            mode:'no-cors',
 
             body:formData
 
         });
 
-        grecaptcha.reset();
+      //  grecaptcha.reset();
 
         document.getElementById('brm-form-content').style.display = 'none';
 
