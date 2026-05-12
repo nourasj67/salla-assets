@@ -157,7 +157,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbxQ9mHpyWqubUzD_Ch0jUz28_L9gBRNFr_drGIOyNFjLTOHBpEmLMot5vpj2PGUsk2q/exec';
+        'https://script.google.com/macros/s/AKfycbzCoj_xwhnmc7k6qYZrBBrbar9NR_j7sCwys9vKktjMxe-c0kZOC9Z6nPv0I2E0YWac/exec';
     
 
 // ─────────────────────────────
@@ -942,34 +942,52 @@ async function send(e) {
         return;
     }
 
+    // التأكد من تحميل reCAPTCHA
+    if (typeof grecaptcha === 'undefined') {
+
+        alert('reCAPTCHA لم يكتمل تحميله بعد');
+
+        return;
+    }
+
     var captchaToken = grecaptcha.getResponse();
 
     if (captchaToken.length == 0) {
+
         alert("يرجى الضغط على مربع أنا لست روبوت");
+
         return;
     }
 
     try {
 
+        // استخدام FormData لتحسين التوافق مع Apps Script
+        var formData = new FormData();
+
+        formData.append('name', name);
+        formData.append('phone', phone);
+        formData.append('business', biz);
+        formData.append('lang', lang);
+
+        formData.append(
+            'g-recaptcha-response',
+            captchaToken
+        );
+
+        formData.append(
+            'timestamp',
+            new Date().toLocaleString(
+                isArabic ? 'ar-SA' : 'en-US'
+            )
+        );
+
         await fetch(SCRIPT_URL, {
 
             method:'POST',
-            mode: 'no-cors',
 
-            body:new URLSearchParams({
+            mode:'no-cors',
 
-                name:name,
-                phone:phone,
-                business:biz,
-                lang:lang,
-                'g-recaptcha-response': captchaToken, // إرسال الرد
-
-                timestamp:
-                    new Date().toLocaleString(
-                        isArabic ? 'ar-SA' : 'en-US'
-                    )
-
-            })
+            body:formData
 
         });
 
