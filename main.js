@@ -158,7 +158,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbzJ0327UV1CVbj2Y83nMnKGtG9o8Et_BJS5-A6LRiRP9GONxAOr9u8_46DWMvu7msA0/exec';
+        'https://script.google.com/macros/s/AKfycby52R9nUgqxHZqPZEw92H4ZE8fdD1-6WR1w-LDapPMsCew3ABYnGrF4LldF2u_2vl2L/exec';
 
 // ─────────────────────────────
 // CSS
@@ -925,22 +925,22 @@ async function send(e) {
         alert(t.alert);
         return;
     }
-    if (typeof grecaptcha === 'undefined') {
-        alert('reCAPTCHA لم يكتمل تحميله بعد');
-        return;
-    }
-    var captchaToken = grecaptcha.getResponse();
-    if (!captchaToken) {
-        alert("يرجى الضغط على مربع أنا لست روبوت");
-        return;
-    }
+    // if (typeof grecaptcha === 'undefined') {
+    //     alert('reCAPTCHA لم يكتمل تحميله بعد');
+    //     return;
+    // }
+    // var captchaToken = grecaptcha.getResponse();
+    // if (!captchaToken) {
+    //     alert("يرجى الضغط على مربع أنا لست روبوت");
+    //     return;
+    // }
 
     var payload = JSON.stringify({
         name:     name,
         phone:    phone,
         business: biz,
         lang:     lang,
-        token:    captchaToken,
+        // token:    captchaToken,
         timestamp: new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US')
     });
 
