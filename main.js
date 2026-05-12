@@ -985,9 +985,9 @@ async function send(e) {
 
             method:'POST',
 
-            mode:'no-cors',
+          
 
-            body:formData
+            body:formData,
 
         });
 
