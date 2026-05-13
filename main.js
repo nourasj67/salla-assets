@@ -158,7 +158,7 @@ document.head.appendChild(script);
     // رابط Google Script
     // ─────────────────────────────
     var SCRIPT_URL =
-        'https://script.google.com/macros/s/AKfycbyHBin_JiN1Z4RQL00wdvDH-KnxQ4WNo1a2udi0tqxpGn8dcv4pjSQTIouHIqX7xUBf/exec';
+        'https://script.google.com/macros/s/AKfycbxRmGfmpmh9fdELetnFPr3rokL5CSB2KOlbOCNLBIJFSmY07lc4Zdxh87ROcW_Dm6g2/exec';
 
 // ─────────────────────────────
 // CSS
@@ -800,7 +800,7 @@ var markup = `
 
                     </div>
 
-                    <div class="g-recaptcha" data-sitekey="6LdjpeQsAAAAAPZLFA1e7I440pnZLo6CK4Q9zOnw"></div>
+                    <input type="text" id="brm-honey" style="display:none" tabindex="-1" autocomplete="off"/>   // حقل مخفي
                     
                     <button id="brm-submit">
                         ${t.submit}
@@ -918,29 +918,25 @@ async function send(e) {
     var name  = (document.getElementById('brm-name')  || {}).value || '';
     var phone = (document.getElementById('brm-phone') || {}).value || '';
     var biz   = (document.getElementById('brm-biz')   || {}).value || '';
+    var honey = (document.getElementById('brm-honey') || {}).value || '';
+
     name  = name.trim();
     phone = phone.trim();
     biz   = biz.trim();
+
     if (!name || !phone || !biz) {
         alert(t.alert);
         return;
     }
-    if (typeof grecaptcha === 'undefined') {
-        alert('reCAPTCHA لم يكتمل تحميله بعد');
-        return;
-    }
-    var captchaToken = grecaptcha.getResponse();
-    if (!captchaToken) {
-        alert("يرجى الضغط على مربع أنا لست روبوت");
-        return;
-    }
+
+    // إذا الحقل المخفي مملوء = بوت
+    if (honey) return;
 
     var payload = JSON.stringify({
         name:     name,
         phone:    phone,
         business: biz,
         lang:     lang,
-        token:    captchaToken,
         timestamp: new Date().toLocaleString(isArabic ? 'ar-SA' : 'en-US')
     });
 
@@ -1003,6 +999,8 @@ async function send(e) {
 //         alert('Send failed');
 //     }
 // }
+
+    
 // ─────────────────────────────
 // Start
 // ─────────────────────────────
