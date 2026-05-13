@@ -800,7 +800,7 @@ var markup = `
 
                     </div>
 
-                    <input type="text" id="brm-honey" style="display:none" tabindex="-1" autocomplete="off"/>   // حقل مخفي
+                    <input type="text" id="brm-honey" style="display:none" tabindex="-1" autocomplete="off"/>
                     
                     <button id="brm-submit">
                         ${t.submit}
