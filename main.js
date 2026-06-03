@@ -228,11 +228,11 @@ var css = `
 
         background:
         linear-gradient(
-            135deg,
-            #0F4C81 0%,
-            #1167A8 55%,
-            #1C88D9 100%
-        );
+        135deg,
+        #155f8b 0%,
+        #1a709f 50%,
+        #2082b5 100%
+    );
 
         min-height:200px;
 
